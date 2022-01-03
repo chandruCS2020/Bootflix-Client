@@ -1,0 +1,44 @@
+.list{
+    width: 100%;
+    margin-top: 10px;
+}
+.listTitle{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 50px;
+}
+.listConatiner{
+    display: flex;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: max-content;
+    transition: all 1s ease;
+}
+.listWrapper{
+    position: relative;
+    margin-bottom: 50px;
+}
+.listWrapper .listSliderArrow{
+    width: 50px;
+    height: 100%;
+    background-image: linear-gradient(to left, rgba(3,11,23,0), rgba(3,11,23,1));
+    color: #fff;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    margin: auto;
+    opacity: 0;
+}
+.listWrapper:hover .listSliderArrow{
+    opacity: 1;
+}
+.listSliderArrow.left{
+    left:0;
+}
+.listSliderArrow.right{
+    right: 0;
+    background-image: linear-gradient(to right, rgba(3,11,23,0), rgba(3,11,23,1));
+}

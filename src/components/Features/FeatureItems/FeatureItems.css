@@ -1,0 +1,79 @@
+.FeatureItem{
+    width: 98%;
+    margin: 0 auto;
+    height: calc(70vh - 60px);
+    border-radius: 50px;
+}
+.FeatureItemsWrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+.FeatureItemsWrapper .Movie_Img{
+    width: 60%;
+    height: 100%;
+    position: relative;
+}
+.FeatureItemsWrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+.MovieProperty{
+    width: 40%;
+    color: #fff;
+    position: relative;
+    background-color: rgb(3,11,23);
+}
+.Movie_image_shadow{
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    background-image:linear-gradient(to left, rgba(3,11,23,0), rgba(3,11,23,1)) ;
+}
+
+.Movie_Prop{
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%);
+    width: 60%;
+    line-height: 2;
+} 
+.Movie_Prop h1{
+    letter-spacing: 2px;
+    font-size: 3rem;
+}
+.movie_description{
+    line-height: 1.5;
+}
+.movie_Language::after{
+    content: '\00B7';
+    margin: 0 5px ;
+    font-size: 1.5rem;
+    vertical-align: middle;
+}
+@media screen and (max-width:960px) {
+    .MovieProperty{
+        overflow: visible;
+        z-index: 2;
+    }
+    .Movie_Prop{
+        width: 100%;
+        overflow: visible;
+        left: 20%;
+    }
+    .Movie_Prop h1{
+        font-size: 2rem!important;
+    }
+    
+}
+@media screen and (max-width:560px) {
+    .Movie_Prop{
+        width: 150%;
+        overflow: visible;
+        left: 20%;
+    }
+    
+}

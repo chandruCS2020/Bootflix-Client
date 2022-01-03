@@ -1,0 +1,55 @@
+.listItem{
+    width: 170px!important;
+    height: 230px;
+    background-color: #131927;
+    margin-right: 10px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    transition: all 0.5s ;
+    cursor: pointer;
+}
+.listItem:hover{
+    transform: scale(1.2);
+    z-index: 3;
+}
+.listItem img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+.listItemInfo{
+    position: absolute;
+    bottom: 0;
+    padding: 10px 15px;
+    width: 100%;
+    color: rgba(255,255,255,1);
+    display: none;
+}
+.listItemInfo .listItemsIcon svg{
+    font-size: 25px;
+    margin-right: 15px;
+    color: rgba(255,255,255,1);
+    cursor: pointer;
+}
+.listItemInfo .listItemGenere{
+    font-size: 12px;
+}
+.listItemDesc{
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+}
+.listItemDesc a{
+    display: none;
+}
+.listItem:hover .listItemInfo,.listItem:hover .listItemBackground{
+    display: block;
+}
+.listItemBackground{
+    background-image: linear-gradient(to bottom, rgba(3,11,23,0), rgba(3,11,23,1));
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    display: none;
+}
