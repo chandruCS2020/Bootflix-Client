@@ -9,6 +9,8 @@ export const movie = [
         year:2010,
         genre:'action romance',
         language:"tamil",
+        content:'16+',
+        certificate:'U/A',
         desc:"Karthi (Shiva), an engineering graduate with an attitude, is on the look out for a job. He does not seem to be much serious in seeking employment while his friends try their best to settle him. "
     },
     {
@@ -21,6 +23,8 @@ export const movie = [
         year:2020,
         genre:'action',
         language:"tamil",
+        content:'16+',
+        certificate:'U/A',
         desc:"Karthi (Shiva), an engineering graduate with an attitude, is on the look out for a job. He does not seem to be much serious in seeking employment while his friends try their best to settle him. "
     },
     {
@@ -33,6 +37,8 @@ export const movie = [
         year:2021,
         genre:'action',
         language:"tamil",
+        content:'16+',
+        certificate:'U/A',
         desc:"Karthi (Shiva), an engineering graduate with an attitude, is on the look out for a job. He does not seem to be much serious in seeking employment while his friends try their best to settle him. "
     },
     {
@@ -45,6 +51,8 @@ export const movie = [
         year:2022,
         genre:'action',
         language:"tamil",
+        content:'16+',
+        certificate:'U/A',
         desc:"Karthi (Shiva), an engineering graduate with an attitude, is on the look out for a job. He does not seem to be much serious in seeking employment while his friends try their best to settle him. "
     },
     {
@@ -57,6 +65,8 @@ export const movie = [
         year:2022,
         genre:'romance',
         language:"tamil",
+        content:'16+',
+        certificate:'U/A',
         desc:"Karthi (Shiva), an engineering graduate with an attitude, is on the look out for a job. He does not seem to be much serious in seeking employment while his friends try their best to settle him. "
     }
 ];

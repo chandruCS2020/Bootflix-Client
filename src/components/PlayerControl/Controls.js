@@ -2,8 +2,8 @@ import React, { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+// import Button from "@material-ui/core/Button";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import Slider from "@material-ui/core/Slider";
 import Tooltip from "@material-ui/core/Tooltip";
 import Grid from "@material-ui/core/Grid";
@@ -152,7 +152,6 @@ const Controls = forwardRef(
     const handletoggle = ()=>{
         settoggle(!toggle);
     }
-    const [replay, setreplay] = useState(false);
     // if(elapsedTime===totalDuration){
     //     setreplay(true)
     // }else{
@@ -163,15 +162,14 @@ const Controls = forwardRef(
         <Grid
         container
         direction="column"
-        justify="space-between"
+        justifyContent="space-between"
         style={{ flexGrow: 1 }}
         >
         <Grid
             container
             direction="row"
             alignItems="center"
-            justify="space-between"
-            style
+            justifyContent="space-between"
             style={{ padding: 16 }}
         >
             <Grid item>
@@ -180,10 +178,10 @@ const Controls = forwardRef(
             </Typography>
             </Grid>
         </Grid>
-        <Grid container direction="row" alignItems="center" justify="center">
+        <Grid container direction="row" alignItems="center" justifyContent="center">
             {elapsedTime===totalDuration ?<> <ReplayIcon onClick={onPlayPause} fontSize="large" style={{color:'#fff',cursor:'pointer'}} /></> 
                 :
-                <><IconButton
+                <><Button
                             onClick={onRewind}
                             className={classes.controlIcons}
                             aria-label="rewind"
@@ -191,7 +189,7 @@ const Controls = forwardRef(
                             <Replay10Icon
                                 className={classes.controlIcons}
                                 fontSize="inherit" />
-                        </IconButton><IconButton
+                        </Button><Button
                             onClick={onPlayPause}
                             className={classes.controlIcons}
                             aria-label="play"
@@ -201,13 +199,13 @@ const Controls = forwardRef(
                                 ) : (
                                     <PlayArrowRoundedIcon fontSize="inherit" />
                                 )}
-                            </IconButton><IconButton
+                            </Button><Button
                                 onClick={onFastForward}
                                 className={classes.controlIcons}
                                 aria-label="forward"
                             >
                                 <Forward10Icon fontSize="inherit" />
-                            </IconButton></>
+                            </Button></>
         
         
             }
@@ -216,7 +214,7 @@ const Controls = forwardRef(
         <Grid
             container
             direction="row"
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="center"
             style={{ padding: 16 }}
         >
@@ -232,14 +230,14 @@ const Controls = forwardRef(
                 onChange={onSeek}
                 onMouseDown={onSeekMouseDown}
                 onChangeCommitted={onSeekMouseUp}
-                onDuration={onDuration}
+                // onDuration={onDuration}
                 className="slider"
                 style={{padding:16}}
             />
             </Grid>
             <div className="bottom_container" style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
                 <div className="bottom_container_left">
-                <IconButton
+                <Button
                   onClick={onPlayPause}
                   className={classes.bottomIcons}
                 >
@@ -248,9 +246,9 @@ const Controls = forwardRef(
                   ) : (
                     <PlayArrowRoundedIcon fontSize="inherit" />
                   )}
-                </IconButton>
+                </Button>
 
-                <IconButton
+                <Button
                   // onClick={() => setState({ ...state, muted: !state.muted })}
                   onClick={onMute}
                   className={`${classes.bottomIcons} ${classes.volumeButton}`}
@@ -262,7 +260,7 @@ const Controls = forwardRef(
                   ) : (
                     <VolumeDown fontSize="inherit" />
                   )}
-                </IconButton>
+                </Button>
 
                 <Slider
                   min={0}
@@ -334,12 +332,12 @@ const Controls = forwardRef(
                   ))}
                 </Grid>
               </Popover>
-              <IconButton
+              <Button
                 onClick={()=>{onToggleFullScreen();handletoggle()}}
                 className={classes.bottomIcons}
               >
                 {toggle ?  <CloseFullscreenIcon fontSize="inherit" /> :<OpenInFullIcon fontSize="inherit" /> }
-              </IconButton>
+              </Button>
                 </div>
             </div>
 

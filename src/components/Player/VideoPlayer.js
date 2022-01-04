@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import Controls from '../PlayerControl/Controls';
 import screenful from 'screenfull';
 
 const useStyles = makeStyles((theme) => ({
     playerWrapper: {
-        width: "100%",
         position: "relative",
     },
+    // reactPlayer:{
+    //     position: 'absolute',
+    //     top: 0,
+    //     left: 0,
+    // },
     controlsWrapper: {
         visibility: "hidden",
         position: "absolute",
@@ -135,7 +139,7 @@ export default function VideoPlayer() {
         controlsRef.current.style.visibility = "hidden";
         count = 0;
     }
-    if (controlsRef.current.style.visibility == "visible") {
+    if (controlsRef.current.style.visibility === "visible") {
         count += 1;
     }
     if (!state.seeking) {
@@ -144,7 +148,7 @@ export default function VideoPlayer() {
     };
 
     const handleSeekChange = (e, newValue) => {
-    console.log({ newValue });
+    // console.log({ newValue });
     setState({ ...state, played: parseFloat(newValue / 100) });
     };
 
@@ -153,7 +157,7 @@ export default function VideoPlayer() {
     };
 
     const handleSeekMouseUp = (e, newValue) => {
-    console.log({ value: e.target });
+    // console.log({ value: e.target });
     setState({ ...state, seeking: false });
     // console.log(sliderRef.current.value)
     playerRef.current.seekTo(newValue / 100, "fraction");
@@ -180,7 +184,7 @@ export default function VideoPlayer() {
     };
 
     const handleMouseMove = () => {
-    console.log("mousemove");
+    // console.log("mousemove");
     controlsRef.current.style.visibility = "visible";
     count = 0;
     };
@@ -192,7 +196,7 @@ export default function VideoPlayer() {
 
     const handleDisplayFormat = () => {
     setTimeDisplayFormat(
-        timeDisplayFormat == "normal" ? "remaining" : "normal"
+        timeDisplayFormat === "normal" ? "remaining" : "normal"
     );
     };
 
@@ -211,7 +215,7 @@ export default function VideoPlayer() {
     const duration =
     playerRef && playerRef.current ? playerRef.current.getDuration() : "00:00";
     const elapsedTime =
-    timeDisplayFormat == "normal"
+    timeDisplayFormat === "normal"
         ? format(currentTime)
         : `-${format(duration - currentTime)}`;
 
@@ -239,7 +243,7 @@ export default function VideoPlayer() {
                     volume={volume}
                     muted={muted}
                     onProgress={handleProgress}
-                    onEnablePIP={true}
+                    className={classes.reactPlayer}
                 />
                 <Controls
                     ref={controlsRef}

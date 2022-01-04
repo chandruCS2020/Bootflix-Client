@@ -384,7 +384,7 @@ nav{
         font-size: 2rem;
     }
     .navbar_header_mobile .navbar_menuItems_mobile{
-        position: absolute;
+        position: fixed;
         width: 30%;
         height: calc(100vh - 60px);
         top:60px;

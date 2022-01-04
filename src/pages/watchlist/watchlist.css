@@ -1,0 +1,16 @@
+.watchlistPage_container{
+    padding: 50px;
+}
+.watchlist_titlehead{
+    color: #ddd;
+    font-size: 400;
+    font-size: 22px;
+    letter-spacing: 0.6px;    
+}
+.watchlist_body{
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+}

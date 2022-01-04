@@ -1,0 +1,57 @@
+.watch{
+    overflow: hidden;
+}
+.movieWatch{
+    padding: 30px 40px;
+    color: #fff;
+}
+.movieWatchDesc > *{
+    margin-bottom: 10px;
+}
+.movieWatchTitle{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.movieWatchAll a{
+    font-weight: 700!important;
+    text-transform: capitalize;
+    color: #1C6AAF;
+}
+.movieWatchAll,.movieWatchDesc{
+    color: #ddd;
+}
+.movieWatchShare{
+    position: relative;
+}
+.movieWatchlistBtn{
+    width: 70px;
+    cursor: pointer;
+    margin:20px 0;
+    color: #ddd;
+}
+.movieWatchlistBtn:hover{
+    color: #fff;
+}
+.movieWatchlistBtn div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 13px;
+}
+/* .horizontalLine{
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background-color: #fff;
+    margin: 20px 0;
+} */
+.trailerBox{
+    margin: 20px 0;
+}
+.Trailer{
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    font-size: 20px;
+}
