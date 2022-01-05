@@ -15,7 +15,7 @@ export default function Watch() {
     console.log(genre[3]);
     useEffect(() => {
         window.onbeforeunload = ()=>{
-            console.log("object")
+            localStorage.setItem("user","fhfc");
         }
     }, [location])
     return (

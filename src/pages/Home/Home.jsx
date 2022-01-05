@@ -1,6 +1,7 @@
 import React from 'react'
 import FeatureList from '../../components/Features/FeatureList/FeatureList'
 import List from '../../components/List/List'
+import Myaccount from '../../components/MyAccount/Myaccount';
 import Navbar from '../../components/Navbar/Navbar'
 import VideoPlayer from '../../components/Player/VideoPlayer';
 // import Subscribe from '../../components/Subscribe/Subscribe';
@@ -17,6 +18,7 @@ export default function Home() {
             <List />
             <VideoPlayer />
             <List />
+            <Myaccount />
             </div>
         </>
     )
