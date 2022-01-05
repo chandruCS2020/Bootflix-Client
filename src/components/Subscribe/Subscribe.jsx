@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import CheckIcon from '@mui/icons-material/Check';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import axios from 'axios';
+import useRazorpay, { RazorpayOptions } from "react-razorpay";
+import logo1  from '../../images/logo.png';
 export default function Subscribe() {
     const [click, setclick] = useState(false);
     const handleClick = () =>{
@@ -15,6 +18,67 @@ export default function Subscribe() {
     const subscription=localStorage.getItem("subscription");
     localStorage.setItem("subscription","");
     console.log(subscription)
+    const [orderResponse, setorderResponse] = useState([]);
+    const Razorpay = useRazorpay();
+    const handlePremium = ()=>{
+        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum')
+        .then((data1)=>{
+            console.log(data1)
+            handlePayment(data1.data.clientId,data1.data.id);
+        })
+        .catch((err)=>{
+            console.log(err.message);
+        })
+    }
+    const handleStandard = ()=>{
+        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Standard')
+        .then((data1)=>{
+            console.log(data1)
+        })
+        .catch((err)=>{
+            console.log(err.message);
+        })
+    }
+    const handlePayment = (key_id,orderId)=>{
+        const options = {
+            key: key_id, // Enter the Key ID generated from the Dashboard
+            amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            currency: "INR",
+            name: "Bootflix",
+            description: "Test Transaction",
+            image: logo1,
+            order_id: orderId, //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+            handler: function (response) {
+                orderRequest(response);
+            },
+            
+            notes: {
+            address: "Bootflix",
+            },
+            theme: {
+            color: "#3399cc",
+            },
+        };
+        
+        const rzp1 = new Razorpay(options);
+        
+        rzp1.on("payment.failed", function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
+        
+        rzp1.open();
+    }
+    const orderRequest = (data)=>{
+        axios.post("https://apibootflix.herokuapp.com/payment-succesfull",data,{withCredentials:true}).then((data1)=>{
+            console.log(data1);
+        }).catch((err)=>{console.log(err.message)})
+    }
     return (
         <div className='Subscribe'>
             <div className="Subscribe_Navbar">
@@ -65,7 +129,7 @@ export default function Subscribe() {
                                     <span>2</span> devices 
                                 </li>
                             </ul>
-                            <div className="SubscribeBtn">
+                            <div className="SubscribeBtn" onClick={handleStandard}>
                                 <span><CurrencyRupeeIcon /></span> 399/Year
                             </div>
                         </div>
@@ -84,7 +148,7 @@ export default function Subscribe() {
                                     <span>4</span> devices 
                                 </li>
                             </ul>
-                            <div className="SubscribeBtn">
+                            <div className="SubscribeBtn"  onClick={handlePremium}>
                                 <span><CurrencyRupeeIcon /></span> 799/Year
                             </div>
                         </div>

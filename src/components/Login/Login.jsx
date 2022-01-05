@@ -2,9 +2,16 @@ import React from 'react'
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './login.css';
+import axios from 'axios';
 export default function Login() {
     const handleLogin = ()=>{
-        console.log("hcchc")
+        axios.get('https://apibootflix.herokuapp.com/google-auth')
+        .then((data1)=>{
+            window.location.href=data1.data;
+        })
+        .catch((err)=>{
+            console.log(err.message);
+        })
     }
     return (
         <div className='Login'>
