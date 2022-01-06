@@ -2,7 +2,8 @@ import AuthReducer from "./AuthReducer";
 import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE = {
-user: JSON.parse(localStorage.getItem("user")) || null,
+user: localStorage.getItem("user") || null,
+isUser:false,
 isFetching: false,
 error: false,
 };
@@ -20,6 +21,7 @@ return (
     <AuthContext.Provider
     value={{
         user: state.user,
+        isUser: state.isUser,
         isFetching: state.isFetching,
         error: state.error,
         dispatch,

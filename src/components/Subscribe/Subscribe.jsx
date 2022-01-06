@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './subscribe.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -7,18 +7,25 @@ import logo from '../../images/logo.png'
 import CheckIcon from '@mui/icons-material/Check';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import axios from 'axios';
-import useRazorpay, { RazorpayOptions } from "react-razorpay";
+import useRazorpay from "react-razorpay";
 import logo1  from '../../images/logo.png';
+import { AuthContext } from '../../context/AuthContext';
+import { logout } from '../../context/AuthAction';
+import Login from '../Login/Login';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 export default function Subscribe() {
     const [click, setclick] = useState(false);
+    const {user,dispatch} = useContext(AuthContext);
+    // console.log(user);
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => {setOpen(true)};
+    const onCloseModal = () => setOpen(false);
     const handleClick = () =>{
         setclick(!click);
     }
-    const user=true;
-    const subscription=localStorage.getItem("subscription");
-    localStorage.setItem("subscription","");
-    console.log(subscription)
-    const [orderResponse, setorderResponse] = useState([]);
+    const subscription= JSON.parse(localStorage.getItem('user')).plan.plan;
     const Razorpay = useRazorpay();
     const handlePremium = ()=>{
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum')
@@ -34,6 +41,7 @@ export default function Subscribe() {
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Standard')
         .then((data1)=>{
             console.log(data1)
+            handlePayment(data1.data.clientId,data1.data.id);
         })
         .catch((err)=>{
             console.log(err.message);
@@ -90,7 +98,7 @@ export default function Subscribe() {
                         user ? 
                         <div className="Subscribe__user_logout">
                             <div className="Subscribe_user_logSession" onClick={handleClick}>
-                                <div className="Subscribe_Number">+916374520688</div>
+                                <div className="Subscribe_Number">{user.firstName}</div>
                                 {click ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                             </div>
                             <ul className={`Subscribe_user_dropdown ${click && 'active'}`}>
@@ -99,23 +107,26 @@ export default function Subscribe() {
                                         <span>My Account</span>
                                     </li>
                                 </Link>
-                                <Link to='/logout' className="Subscribe_logout">
+                                <div onClick={()=> dispatch(logout())} className="Subscribe_logout">
                                     <li >
                                         <span>Logout</span>
                                     </li>
-                                </Link>
+                                </div>
                             </ul>
                         </div> :
-                        <div className="Subscribe_loginBtn">Log In</div>}
+                        <div onClick={onOpenModal} className="Subscribe_loginBtn">Log In</div>}
                     
                 </div>
             </div>
+            <Modal open={open} onClose={onCloseModal} closeIcon={<CloseRoundedIcon />} center classNames='LoginModel'>
+                    <Login />
+                </Modal>
             <div className="Subscribe_content">
                 <div className="Subscribe_content_title">
                     <h1>Subscribe to watch all content on Bootflix</h1>
                 </div>
                 <div className="Subscribe_container">
-                    <div className={`Subscribe_container_main Subscribe_Standard ${(subscription ==='Standard' || subscription ==='Premium') && 'current'}`}>
+                    <div className={`Subscribe_container_main Subscribe_Standard ${(subscription ==='Standard' || subscription ==='Preminum') && 'current'}`}>
                         <div className="Subscribe_main_title"><h3>Standard</h3></div>
                         <div className="Subscribe_details">
                             <ul className="Subscribe_details_list">
@@ -134,7 +145,7 @@ export default function Subscribe() {
                             </div>
                         </div>
                     </div>
-                    <div className={`Subscribe_container_main Subscribe_Premium ${subscription ==='Premium' && 'current'}`}>
+                    <div className={`Subscribe_container_main Subscribe_Premium ${subscription ==='Preminum' && 'current'}`}>
                         <div className="Subscribe_main_title"><h3>Premium</h3></div>
                         <div className="Subscribe_details">
                             <ul className="Subscribe_details_list">

@@ -3,17 +3,23 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import './myaccount.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import logo from '../../images/logo.png'
 export default function Myaccount() {
+    const { user } = useContext(AuthContext);
     const [image, setimage] = useState([]);
     const handleImage = (e)=>{
-        setimage(e.target.files);
+        setimage(e.target.files[0]);
     }
-    const [imageUrl, setimageUrl] = useState([]);
+    const [imageUrl, setimageUrl] = useState([logo]);
     useEffect(() => {
         if(image.length<1) return;
-        setimageUrl(URL.createObjectURL(image[0]));
+        setimageUrl(URL.createObjectURL(image));
     }, [image])
     console.log(imageUrl);
+    // var user=JSON.parse(localStorage.getItem("user"));
+    // console.log(user.profilePic)
     return (
         <div>
             <div className="Myaccount_Container">

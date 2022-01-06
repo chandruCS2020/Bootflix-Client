@@ -12,10 +12,11 @@ export default function Watch() {
     let location = useLocation();
     const genre=location.pathname.split('/');
     let history= useHistory();
+    console.log(history)
     console.log(genre[3]);
     useEffect(() => {
         window.onbeforeunload = ()=>{
-            localStorage.setItem("user","fhfc");
+            // localStorage.setItem("user","fhfc");
         }
     }, [location])
     return (

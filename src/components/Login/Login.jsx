@@ -5,13 +5,7 @@ import './login.css';
 import axios from 'axios';
 export default function Login() {
     const handleLogin = ()=>{
-        axios.get('https://apibootflix.herokuapp.com/google-auth')
-        .then((data1)=>{
-            window.location.href=data1.data;
-        })
-        .catch((err)=>{
-            console.log(err.message);
-        })
+        window.location.href='https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=976399131482-mv20jui1ieahgp2p3j9jokdc467kgqnv.apps.googleusercontent.com&scope=openid%20email%20profile&redirect_uri=https%3A//apibootflix.herokuapp.com/oauth-google-callback&state=aroundTrip';
     }
     return (
         <div className='Login'>

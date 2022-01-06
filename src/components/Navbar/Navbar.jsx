@@ -1,4 +1,4 @@
-import React , { useState } from 'react'
+import React , { useContext, useState } from 'react'
 import './Navbar.css';
 import MenuIcon from '@mui/icons-material/Menu'
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -15,6 +15,8 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Login from '../Login/Login';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { AuthContext } from '../../context/AuthContext';
+import { logout } from '../../context/apicalls';
 function Navbar(props) {
     const [mobilemenuClick, setmobilemenuClick] = useState(false);
     const [open, setOpen] = useState(false);
@@ -26,6 +28,10 @@ function Navbar(props) {
     }
     console.log(mobilemenuClick);
     console.log(props.isloggedin);
+    const {user ,isUser}=useContext(AuthContext);
+    console.log(isUser)
+    const {dispatch}=useContext(AuthContext);
+    
     return (
         <>
             <nav>
@@ -107,11 +113,11 @@ function Navbar(props) {
                         {/* <button className="subscribe-btn right-element upgrade">Music Player</button> */}
                         {props.isSubscribed ?  <button className="subscribe-btn right-element upgrade">upgrade</button> : <NavLink to='/subscribe' className="subscribe-btn right-element subscribe">Subscribe</NavLink>}
                         <div className="right-element user-profile">
-                            {props.isloggedin ?<div className="user-pic">
+                            {localStorage.getItem('user') ?<div className="user-pic">
                                 <div className="dropdown-container">
                                     <AccountCircleIcon />
                                     <div className="sublink-container slide-up">
-                                        <NavLink to='/fcb' className="dropdown-link">Log Out</NavLink>
+                                        <div onClick={()=>logout()} className="dropdown-link">Log Out</div>
                                     </div>
                                 </div>
                             </div> :
@@ -141,7 +147,7 @@ function Navbar(props) {
                             <div className="navbar_userprofile_mobile">
                                 <AccountCircleIcon />
                             </div>
-                            {props.isloggedin ?
+                            {isUser ?
                                 <div className="navbar_userdetails_mobile">
                                     <h3>Chandru</h3>
                                     <h5>6374520688</h5>
@@ -188,19 +194,19 @@ function Navbar(props) {
                             </ul>
                         </div>
                         <div className="navbar_logout_mobile bottom-element">
-                            {props.isloggedin ? 
-                                <NavLink to='/'>
+                            {localStorage.getItem('user') ? 
+                                <div onClick={()=> logout()} className='log'>
                                     <div className="iconClass Songs">
                                         <LogoutIcon />
                                     </div>
                                     <div>Log Out</div>
-                                </NavLink> :
-                                <NavLink to='/'>
+                                </div> :
+                                <div onClick={onOpenModal} className='log'>
                                     <div className="iconClass Songs">
                                         <LoginIcon />
                                     </div>
-                                    <div onClick={onOpenModal}>Login</div>
-                                </NavLink>
+                                    <div >Login</div>
+                                </div>
                             
                             }
                         </div>
