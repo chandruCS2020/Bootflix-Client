@@ -9,7 +9,7 @@ try {
         console.log(data);
         localStorage.setItem('user',JSON.stringify(data.data));
         console.log(JSON.parse(localStorage.getItem('user')).plan.plan);
-        window.location.href='http://localhost:3000/';
+        // window.location.href='http://localhost:3000/';
         
     })
     .catch((err)=>{
