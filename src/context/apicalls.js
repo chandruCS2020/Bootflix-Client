@@ -9,6 +9,8 @@ try {
         console.log(data);
         localStorage.setItem('user',JSON.stringify(data.data));
         console.log(JSON.parse(localStorage.getItem('user')).plan.plan);
+        window.location.href='http://localhost:3000/';
+        
     })
     .catch((err)=>{
         console.log(err.message);
@@ -25,6 +27,7 @@ export const logout = async()=>{
     try{
         const res = await axios.get("https://apibootflix.herokuapp.com/logout",{withCredentials:true});
         localStorage.removeItem('user');
+        window.location.href='http://localhost:3000/';
     }catch(err){
         console.log(err.message);
     }
