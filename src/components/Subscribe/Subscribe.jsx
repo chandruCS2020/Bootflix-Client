@@ -26,6 +26,7 @@ export default function Subscribe() {
         setclick(!click);
     }
     const subscription= JSON.parse(localStorage.getItem('user')).plan.plan;
+    console.log(subscription);
     const Razorpay = useRazorpay();
     const handlePremium = ()=>{
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum')
