@@ -99,7 +99,7 @@ export default function Subscribe() {
                         user ? 
                         <div className="Subscribe__user_logout">
                             <div className="Subscribe_user_logSession" onClick={handleClick}>
-                                <div className="Subscribe_Number">{user.firstName}</div>
+                                <div className="Subscribe_Number">{JSON.parse(localStorage.getItem('user')).firstName}</div>
                                 {click ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                             </div>
                             <ul className={`Subscribe_user_dropdown ${click && 'active'}`}>
