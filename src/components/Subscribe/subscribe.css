@@ -36,6 +36,8 @@
     border-radius: 5px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
+    margin-top: 5px;
+    margin-left: -2px;
 }
 .Subscribe_user_logSession{
     min-height: 30px;
@@ -47,6 +49,9 @@
     cursor: pointer;
     padding: 10px 7px;
     text-align: center;
+}
+.Subscribe_user_dropdown{
+    width: 100px!important;
 }
 .Subscribe_myAccount,.Subscribe_logout{
     border-top: 1px solid #1f80e0;

@@ -28,10 +28,13 @@ function Navbar(props) {
     }
     console.log(mobilemenuClick);
     console.log(props.isloggedin);
-    const {user ,isUser}=useContext(AuthContext);
-    console.log(isUser)
-    const {dispatch}=useContext(AuthContext);
-    
+    const {isUser}=useContext(AuthContext);
+    var subscription='';
+    if(localStorage.getItem('user')===null){
+        subscription='Free';
+    }else{
+        subscription=JSON.parse(localStorage.getItem('user')).plan.plan;
+    }
     return (
         <>
             <nav>
@@ -111,7 +114,7 @@ function Navbar(props) {
                             </div>
                         </div>
                         {/* <button className="subscribe-btn right-element upgrade">Music Player</button> */}
-                        {props.isSubscribed ?  <button className="subscribe-btn right-element upgrade">upgrade</button> : <NavLink to='/subscribe' className="subscribe-btn right-element subscribe">Subscribe</NavLink>}
+                        {subscription!=='Free' ?  <NavLink to='/subscribe' className="subscribe-btn right-element upgrade">upgrade</NavLink> : <NavLink to='/subscribe' className="subscribe-btn right-element subscribe">Subscribe</NavLink>}
                         <div className="right-element user-profile">
                             {localStorage.getItem('user') ?<div className="user-pic">
                                 <div className="dropdown-container">
@@ -138,7 +141,7 @@ function Navbar(props) {
                             <NavLink to='/'><img src={logo} alt="" /></NavLink>
                         </div>
                     </div>
-                    {props.isSubscribed ?  <button className="subscribe-btn upgrade">upgrade</button> : <NavLink to='/subscribe'><button className="subscribe-btn  subscribe">Subscribe</button></NavLink>}
+                    {subscription!=='Free' ?  <NavLink to='/subscribe' className="subscribe-btn upgrade">upgrade</NavLink> : <NavLink to='/subscribe'><button className="subscribe-btn  subscribe">Subscribe</button></NavLink>}
                     <div className="searchBar_mobile right-element">
                         <SearchIcon />
                     </div>
@@ -194,7 +197,7 @@ function Navbar(props) {
                             </ul>
                         </div>
                         <div className="navbar_logout_mobile bottom-element">
-                            {localStorage.getItem('user') ? 
+                            {isUser? 
                                 <div onClick={()=> logout()} className='log'>
                                     <div className="iconClass Songs">
                                         <LogoutIcon />

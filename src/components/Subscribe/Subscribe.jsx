@@ -17,8 +17,8 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 export default function Subscribe() {
     const [click, setclick] = useState(false);
-    const {user,dispatch} = useContext(AuthContext);
-    // console.log(user);
+    const {isUser,dispatch} = useContext(AuthContext);
+    console.log(isUser);
     const [open, setOpen] = useState(false);
     const onOpenModal = () => {setOpen(true)};
     const onCloseModal = () => setOpen(false);
@@ -96,7 +96,7 @@ export default function Subscribe() {
                 </div>
                 <div className={`right-element Subscribe__user_details ${click && 'active'}`}>
                     {
-                        user ? 
+                        isUser ? 
                         <div className="Subscribe__user_logout">
                             <div className="Subscribe_user_logSession" onClick={handleClick}>
                                 <div className="Subscribe_Number">{JSON.parse(localStorage.getItem('user')).firstName}</div>
