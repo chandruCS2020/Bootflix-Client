@@ -70,7 +70,7 @@ export default function Watch() {
                             <hr />
                             <div className="trailerBox">
                                 <div className="Trailer">Trailer & Extras </div>
-                                <Trailer id={movieItem._id} />
+                                <Trailer id={movieItem._id} item={movieItem} />
                             </div>
                         </div> 
                     </>
