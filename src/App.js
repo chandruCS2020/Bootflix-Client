@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Subscribe from './components/Subscribe/Subscribe';
 import Watchlist from './pages/watchlist/watchlist'
@@ -7,9 +7,13 @@ import Watch from './pages/watch/Watch';
 import { useContext, useEffect } from 'react';
 import { login } from './context/apicalls';
 import { AuthContext } from "./context/AuthContext";
+import Myaccount from './pages/myaccount/Myaccount';
+import Login from './pages/login/Login';
+import VideoPlayer from './components/Player/VideoPlayer';
+import Genre from './pages/genre/Genre';
 
 function App() {
-  const { dispatch } = useContext(AuthContext);
+  const { isUser,dispatch } = useContext(AuthContext);
   useEffect(() => {
       login(dispatch);
   }, [])
@@ -20,7 +24,12 @@ function App() {
             <Route path='/' exact component={Home} />
             <Route path='/subscribe' component={Subscribe} />
             <Route path='/watchlist' component={Watchlist} />
-            <Route path='/movie/:id/watch' component={Watch} />
+            <Route path='/movie/:id/watch' component={VideoPlayer} />
+            <Route path='/trailer/:id/watch' component={VideoPlayer} />
+            <Route path='/movie/:id' component={Watch} />
+            <Route path='/myaccount' component={Myaccount} />
+            <Route path='/login' component={Login} />
+            <Route path='/genre/:genre' component={Genre} />
           </Switch>
       </Router>
     </div>

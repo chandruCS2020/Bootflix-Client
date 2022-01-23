@@ -3,10 +3,13 @@ import ReactPlayer from "react-player";
 import { makeStyles} from "@material-ui/core/styles";
 import Controls from '../PlayerControl/Controls';
 import screenful from 'screenfull';
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     playerWrapper: {
         position: "relative",
+        width:'100%',
+        overflow:'hidden'
     },
     // reactPlayer:{
     //     position: 'absolute',
@@ -89,13 +92,17 @@ export default function VideoPlayer() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
     const [bookmarks, setBookmarks] = useState([]);
+    
+    const location = useLocation();
+    const id = location.pathname.split('/')[2];
+    const details = location.pathname.split('/')[1];
     const [state, setState] = useState({
     pip: false,
-    playing: true,
+    playing: false,
     controls: false,
     light: false,
 
-    muted: true,
+    muted: false,
     played: 0,
     duration: 0,
     playbackRate: 1.0,
@@ -233,7 +240,7 @@ export default function VideoPlayer() {
                     ref={playerRef}
                     width="100%"
                     height="100%"
-                    url="https://curatedsolutions.in/images/video/Paiya%20-%20Thuli%20Thuli%20Video%20-%20Karthi%2C%20Tamannah%20-%20Yuvan%20Shankar%20Raja.mp4"
+                    url={`https://apibootflix.herokuapp.com/${details==='movie' ? `movie` : `trailer`}/`+id+`/watch`}
                     pip={pip}
                     playing={playing}
                     controls={false}
@@ -244,6 +251,7 @@ export default function VideoPlayer() {
                     muted={muted}
                     onProgress={handleProgress}
                     className={classes.reactPlayer}
+                    
                 />
                 <Controls
                     ref={controlsRef}
@@ -267,6 +275,7 @@ export default function VideoPlayer() {
                     onPlaybackRateChange={handlePlaybackRate}
                     onToggleFullScreen={toggleFullScreen}
                     volume={volume}
+                    movieId={id}
                 />
                 </div>
         </>

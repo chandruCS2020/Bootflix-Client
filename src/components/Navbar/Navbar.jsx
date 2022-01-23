@@ -17,6 +17,7 @@ import Login from '../Login/Login';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { AuthContext } from '../../context/AuthContext';
 import { logout } from '../../context/apicalls';
+import axios from 'axios';
 function Navbar(props) {
     const [mobilemenuClick, setmobilemenuClick] = useState(false);
     const [open, setOpen] = useState(false);
@@ -26,8 +27,6 @@ function Navbar(props) {
     function mobilemenuOnclick(){
         setmobilemenuClick(!mobilemenuClick);
     }
-    console.log(mobilemenuClick);
-    console.log(props.isloggedin);
     const {isUser}=useContext(AuthContext);
     var subscription='';
     if(localStorage.getItem('user')===null){
@@ -35,33 +34,25 @@ function Navbar(props) {
     }else{
         subscription=JSON.parse(localStorage.getItem('user')).plan.plan;
     }
+    const [searchResult, setsearchResult] = useState(null);
+    const handelSearchChange = (e)=>{
+        const getData = async()=>{
+            try{
+                const res = await axios.get('https://apibootflix.herokuapp.com/list-movies?search='+e.target.value);
+                setsearchResult(res.data.result);
+            }catch(err){
+                console.log(err.message);
+            }
+        }
+        getData();
+    }
+    const handlesearchBarClick = ()=>{
+
+    }
     return (
         <>
             <nav>
                 <div className="navbar_header_desktop">
-                        {/* <div className="navbar_menubar">
-                            <div className="navbar_menubar_Icon">
-                                <MenuIcon />
-                            </div>
-                            <div className="navbar_menu_list">
-                                <div className="navbar_menu_items">
-                                    <NavLink to='/language'>
-                                        <div className="iconClass Language">
-                                            <TranslateIcon />
-                                        </div>
-                                        <div>Language</div>
-                                    </NavLink>
-                                </div>
-                                <div className="navbar_menu_items">
-                                    <NavLink to='/genres'>
-                                    <div className="iconClass Genres">
-                                            <ImportContactsIcon />
-                                        </div>
-                                        <div>Genres</div>
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div> */}
                         <div className="navbar_logo">
                             <div className="navbar_logo_inner">
                                 <NavLink to='/'><img src={logo} alt="" /></NavLink>
@@ -74,13 +65,6 @@ function Navbar(props) {
                                         <NavLink className="nav-link" to='/movies'>
                                             <div>Movies</div>
                                         </NavLink>
-                                        <div className="sublink-container slide-up">
-                                            <NavLink to='/movies/languages/tamil' className='dropdown-link'>Tamil</NavLink>
-                                            <NavLink to='/movies/languages/telugu' className='dropdown-link'>Telugu</NavLink>
-                                            <NavLink to='/movies/languages/telugu' className='dropdown-link'>Malayalam</NavLink>
-                                            <NavLink to='/movies/languages/telugu' className='dropdown-link'>English</NavLink>
-                                            <NavLink to='/movies/languages/telugu' className='dropdown-link'>Hindi</NavLink>
-                                        </div>
                                     </div>
                                 </li>
                                 <li>
@@ -108,7 +92,7 @@ function Navbar(props) {
                         </div>
                         
                         <div className="search-container right-element">
-                            <input type="search" className='input-open' placeholder='Search' autoComplete='off' id='seacrField' name="search" />
+                            <input type="search" className='input-open' placeholder='Search' autoComplete='off' id='seacrField' name="search" onChange={handelSearchChange} />
                             <div className="searchIcon  searchIcon-active">
                                 <SearchIcon />
                             </div>
@@ -142,18 +126,17 @@ function Navbar(props) {
                         </div>
                     </div>
                     {subscription!=='Free' ?  <NavLink to='/subscribe' className="subscribe-btn upgrade">upgrade</NavLink> : <NavLink to='/subscribe'><button className="subscribe-btn  subscribe">Subscribe</button></NavLink>}
-                    <div className="searchBar_mobile right-element">
+                    <div className="searchBar_mobile right-element" onClick={handlesearchBarClick}>
                         <SearchIcon />
                     </div>
                     <div className={`navbar_menuItems_mobile ${mobilemenuClick ? `active` : ``}`}>
                         <div className="navbar_menuItems_user_mobile">
                             <div className="navbar_userprofile_mobile">
-                                <AccountCircleIcon />
+                                <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" />
                             </div>
                             {isUser ?
                                 <div className="navbar_userdetails_mobile">
-                                    <h3>Chandru</h3>
-                                    <h5>6374520688</h5>
+                                    <h3>{JSON.parse(localStorage.getItem('user')).firstName} {JSON.parse(localStorage.getItem('user')).lastName}</h3>
                                 </div> :
                                 <div className="navbar_userdetails_mobile">
                                     <h3>Login To Explore</h3>

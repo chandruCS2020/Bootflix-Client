@@ -1,7 +1,7 @@
 .Subscribe{
     min-height: 100vh;
     width: 100%;
-    background-color: #0C111B;
+    background-color: var(--bg-color);
 }
 .Subscribe_Navbar{
     display: flex;
@@ -16,7 +16,7 @@
 }
 .Subscribe__user_details{
     
-    background-color: #1f80e0;
+    background-color: var(--btn-color);
     border-radius: 5px;
     position: relative;
     color: #fff;
@@ -32,7 +32,7 @@
     width: 100%;
     width: stretch;
     position: absolute;
-    background-color: #1f80e0;
+    background-color: var(--btn-color);
     border-radius: 5px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -54,7 +54,7 @@
     width: 100px!important;
 }
 .Subscribe_myAccount,.Subscribe_logout{
-    border-top: 1px solid #1f80e0;
+    border-top: 1px solid var(--btn-color);
     color: inherit;
 }
 .Subscribe_user_dropdown.active{
@@ -67,8 +67,8 @@
 }
 .Subscribe_loginBtn{
     padding: 7px 17px;
-    background-color:#1f80e0;
-    border: solid 1px #1f80e0;
+    background-color:var(--btn-color);
+    border: solid 1px var(--btn-color);
     border-radius: 3px;
     font-size: 12px;
     text-transform: none;
@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 .Subscribe_content_title{
-    color: #fff;
+    color: var(--text-color);
     letter-spacing: 0.4px;
 }
 .Subscribe_content{
@@ -93,14 +93,14 @@
     width: 100%;
     margin: 30px auto;
     justify-content: space-evenly;
-    background-color: #192133;
+    background-color: var(--btn-color);
     min-height: 400px;
     padding: 40px;
     margin-top: 50px;
     border-radius: 10px;
 }
 .Subscribe_container_main{
-    background-color: #0C111B;
+    background-color: var(--bg-color);
     padding: 20px;
     border-radius: 10px;
 }
@@ -111,7 +111,7 @@
     justify-content: space-between;
 }
 .SubscribeBtn{
-    background-color: #1f80e0;
+    background-color: var(--btn-color);
     border-radius: 5px;
     padding: 7px 17px;
     display: flex;
@@ -122,7 +122,7 @@
     cursor: pointer;
 }
 .Subscribe_main_title{
-    color: #fff;
+    color: var(--text-color);
     padding: 10px 0;
     font-size: 1.5rem;
     letter-spacing: 0.6px;
@@ -136,7 +136,7 @@
     letter-spacing: 0.5px;
 }
 .Subscribe_details_items svg{
-    color: #ddd;
+    color: var(--text-color);
 }
 .Subscribe_details_items span{
     margin-right: 10px;

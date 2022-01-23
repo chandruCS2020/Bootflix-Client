@@ -41,4 +41,8 @@
 .listSliderArrow.right{
     right: 0;
     background-image: linear-gradient(to right, rgba(3,11,23,0), rgba(3,11,23,1));
+    display: none;
+}
+.listSliderArrow.right.show{
+    display: block;
 }

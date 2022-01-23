@@ -1,11 +1,14 @@
 .trailerContainer{
     width: 250px;
     height: 150px;
-    background-color: aqua;
+    background-color: var(--bg-color);
     overflow: hidden;
     border-radius: 4px;
     position: relative;
     cursor: pointer;
+}
+a{
+    color: inherit;
 }
 .trailerContainer img{
     width: 100%;

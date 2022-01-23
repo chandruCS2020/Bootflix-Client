@@ -6,10 +6,7 @@ dispatch(loginStart());
 try {
     await axios.get("https://apibootflix.herokuapp.com/me",{withCredentials:true})
     .then((data)=>{
-        console.log(data);
         localStorage.setItem('user',JSON.stringify(data.data));
-        console.log(JSON.parse(localStorage.getItem('user')).plan.plan);
-        // window.location.href='http://localhost:3000/';
         dispatch(loginSuccess());
         
     })
@@ -33,3 +30,11 @@ export const logout = async()=>{
         console.log(err.message);
     }
 };
+
+export const WishList = async(id)=>{
+    try{
+        await axios.get("https://apibootflix.herokuapp.com/addMovieToWhislist/"+id,{withCredentials:true});
+    }catch(err){
+        console.log(err.message);
+    }
+}

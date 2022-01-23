@@ -4,27 +4,100 @@
     border-radius: 50%;
     object-fit: cover;
 }
-.Myaccount_img{
-    position: relative;
+.user__ProfilePic{
     width: 100px;
     height: 100px;
-}
-.uploadIcon{
-    width: 30px;
-    height: 30px;
-    background-color: rgb(3,11,23);
     border-radius: 50%;
-    position: absolute;
-    bottom: -5px;
-    right: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
+    margin: 0 auto;
+}
+.Myaccount_Container{
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: var(--bg-color);
+}
+.Myaccount_body{
+    margin: 0 auto;
+    padding: 52px 60px 20px;
+    max-width: 100%;
+}
+.Myaccount__container{
+    position: relative;
+    padding: 0;
+    max-width: 426px;
+    margin: 0 auto;
+    width: 100%;
+}
+.Myaccount__container .user__Profile{
+    margin-bottom: 20px;
+}
+.Myaccount__container .user__Profile__details{
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+}
+.Myaccount__container .user__ProfileInfo {
+    display: block;
+    margin-top: 10px;
+}
+.Myaccount__container .user_details{
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+}
+.Myaccount__container .userName{
+    letter-spacing: -0.6px;
+    font-size: 24px;
+    font-weight: 500;
+    color:#fff;
+    text-transform: capitalize;
+}
+.Myaccount__container .userName_sub{
+    letter-spacing: -0.3px;
+    font-size: 16px;
+    color: #fff;
+}
+.Myaccount__container .userSubscription_details{
+    color: var(--text-color);
+    background-color: var(--btn-color);
+    max-width:400px ;
+    margin: 20px 0;  
+    padding: 10px 20px;
+}
+.Myaccount_Container .userSubscription_details .subscription_details > *{
+    font-weight:500;
+}
+.Myaccount__container .userSubscription_details .subscribe_btn{
+    padding: 10px;
+    background-color: var(--bg-color);
+    margin: 20px 0 0 0;
+    line-height: 48px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 5px;
     cursor: pointer;
 }
-.uploadIcon svg{
-    display: flex;
-    align-items: center;
-    font-size: inherit;
-    color: #fff;
+.Myaccount_Container .logoutUser{
+    background-color: var(--btn-color);
+    margin: 20px 0;
+    padding: 10px 20px;
+    max-width: 400px;
+    line-height: 35px;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+@media screen and (max-width:480px) {
+    .Myaccount_Container .Myaccount_body{
+        padding: 52px 20px 20px;
+    }
+}
+@media screen and (max-width:300px) {
+    .Myaccount_Container .userSubscription_details .subscription_details > *{
+        font-size: 13px;
+    }
+    .Myaccount__container .userSubscription_details .subscribe_btn{
+        line-height: 25px;
+    }
 }

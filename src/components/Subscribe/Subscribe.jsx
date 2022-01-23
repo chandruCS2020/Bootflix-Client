@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import './subscribe.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import CheckIcon from '@mui/icons-material/Check';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
@@ -10,14 +10,14 @@ import axios from 'axios';
 import useRazorpay from "react-razorpay";
 import logo1  from '../../images/logo.png';
 import { AuthContext } from '../../context/AuthContext';
-import { logout } from '../../context/AuthAction';
+import { logout } from '../../context/apicalls';
 import Login from '../Login/Login';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 export default function Subscribe() {
     const [click, setclick] = useState(false);
-    const {isUser,dispatch} = useContext(AuthContext);
+    const {isUser} = useContext(AuthContext);
     console.log(isUser);
     const [open, setOpen] = useState(false);
     const onOpenModal = () => {setOpen(true)};
@@ -25,8 +25,17 @@ export default function Subscribe() {
     const handleClick = () =>{
         setclick(!click);
     }
-    const subscription= JSON.parse(localStorage.getItem('user')).plan.plan;
-    console.log(subscription);
+    const history = useHistory();
+    const location = useLocation();
+    // if(!isUser){
+    //     history.push(`/login?returnUrl=${location.pathname}`)
+    // }
+    var subscription='';
+    if(localStorage.getItem('user')===null){
+        subscription= 'Free';
+    }else{
+        subscription= JSON.parse(localStorage.getItem('user')).plan.plan;
+    }
     const Razorpay = useRazorpay();
     const handlePremium = ()=>{
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum')
@@ -108,7 +117,7 @@ export default function Subscribe() {
                                         <span>My Account</span>
                                     </li>
                                 </Link>
-                                <div onClick={()=> dispatch(logout())} className="Subscribe_logout">
+                                <div onClick={()=> logout()} className="Subscribe_logout">
                                     <li >
                                         <span>Logout</span>
                                     </li>

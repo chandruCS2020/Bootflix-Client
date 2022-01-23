@@ -1,5 +1,5 @@
 .Login{
-    background-color: #131927;
+    background-color: var(--bg-color);
     padding: 50px 30px;
     display: flex;
     flex-direction: column;
@@ -12,9 +12,9 @@
     font-size: 16px;
     font-weight: 500;
     text-align: center;
-    color: #1f80e0;
+    color: var(--btn-color);
     background-color: rgba(31,127,224,0.1);
-    border: 1px solid #1f80e0;
+    border: 1px solid var(--btn-color);
     border-radius: 5px;
     padding: 5px 10px;
     text-transform: uppercase;
@@ -30,7 +30,7 @@
     font-size: 2rem;
 }
 .orSignUp{
-    color: #fff;
+    color: var(--text-color);
     margin: 15px 0;
     text-transform: uppercase;
     font-size: 1.2rem;

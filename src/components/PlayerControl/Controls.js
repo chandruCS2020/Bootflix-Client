@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -21,6 +21,8 @@ import VolumeMute from "@material-ui/icons/VolumeOff";
 import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import ReplayIcon from '@mui/icons-material/Replay';
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
 controlsWrapper: {
     visibility: "hidden",
@@ -133,6 +135,7 @@ const Controls = forwardRef(
     volume,
     onVolumeChange,
     onBookmark,
+    movieId,
     },
     ref
 ) => {
@@ -141,7 +144,6 @@ const Controls = forwardRef(
     const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     };
-
     const handleClose = () => {
     setAnchorEl(null);
     };
@@ -157,193 +159,222 @@ const Controls = forwardRef(
     // }else{
     //     setreplay(false)
     // }
-    return (
-    <div ref={ref} className={classes.controlsWrapper}>
-        <Grid
-        container
-        direction="column"
-        justifyContent="space-between"
-        style={{ flexGrow: 1 }}
-        >
-        <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            style={{ padding: 16 }}
-        >
-            <Grid item>
-            <Typography variant="h5" style={{ color: "#fff" }}>
-                Paiyaa
-            </Typography>
-            </Grid>
-        </Grid>
-        <Grid container direction="row" alignItems="center" justifyContent="center">
-            {elapsedTime===totalDuration ?<> <ReplayIcon onClick={onPlayPause} fontSize="large" style={{color:'#fff',cursor:'pointer'}} /></> 
-                :
-                <><Button
-                            onClick={onRewind}
-                            className={classes.controlIcons}
-                            aria-label="rewind"
-                        >
-                            <Replay10Icon
-                                className={classes.controlIcons}
-                                fontSize="inherit" />
-                        </Button><Button
-                            onClick={onPlayPause}
-                            className={classes.controlIcons}
-                            aria-label="play"
-                        >
-                                {playing ? (
-                                    <PauseIcon fontSize="inherit" />
-                                ) : (
-                                    <PlayArrowRoundedIcon fontSize="inherit" />
-                                )}
-                            </Button><Button
-                                onClick={onFastForward}
-                                className={classes.controlIcons}
-                                aria-label="forward"
-                            >
-                                <Forward10Icon fontSize="inherit" />
-                            </Button></>
-        
-        
+    const [movieItem, setmovieItem] = useState([]);
+    const [loading, setloading] = useState(false);
+    const location = useLocation();
+    const details = location.pathname.split('/')[1];
+    useEffect(() => {
+        const data = async()=>{
+            try{
+                const res = await axios.get('https://apibootflix.herokuapp.com/movie/'+movieId);
+                setmovieItem(res.data);
+                if(res.status===200){
+                    setloading(true);
+                }
+            }catch(err){
+                setloading(false);
+                console.log(err.message);
             }
-        </Grid>
-        {/* bottom controls */}
-        <Grid
-            container
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            style={{ padding: 16 }}
-        >
-            <Grid item xs={12}>
-            <PrettoSlider
-                min={0}
-                max={100}
-                ValueLabelComponent={(props) => (
-                <ValueLabelComponent {...props} value={elapsedTime} />
-                )}
-                aria-label="custom thumb label"
-                value={played * 100}
-                onChange={onSeek}
-                onMouseDown={onSeekMouseDown}
-                onChangeCommitted={onSeekMouseUp}
-                // onDuration={onDuration}
-                className="slider"
-                style={{padding:16}}
-            />
-            </Grid>
-            <div className="bottom_container" style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
-                <div className="bottom_container_left">
-                <Button
-                  onClick={onPlayPause}
-                  className={classes.bottomIcons}
-                >
-                  { elapsedTime===totalDuration ? <ReplayIcon onClick={onPlayPause} fontSize="inherit"  style={{cursor:'pointer'}} /> : playing ? (
-                    <PauseIcon fontSize="inherit" />
-                  ) : (
-                    <PlayArrowRoundedIcon fontSize="inherit" />
-                  )}
-                </Button>
-
-                <Button
-                  // onClick={() => setState({ ...state, muted: !state.muted })}
-                  onClick={onMute}
-                  className={`${classes.bottomIcons} ${classes.volumeButton}`}
-                >
-                  {muted ? (
-                    <VolumeMute fontSize="inherit" />
-                  ) : volume > 0.5 ? (
-                    <VolumeUp fontSize="inherit" />
-                  ) : (
-                    <VolumeDown fontSize="inherit" />
-                  )}
-                </Button>
-
-                <Slider
+        }
+        data();
+    }, []);
+    
+    return (
+    <>
+    {loading && 
+      <>
+        <div ref={ref} className={classes.controlsWrapper}>
+          <Grid
+          container
+          direction="column"
+          justifyContent="space-between"
+          style={{ flexGrow: 1 }}
+          >
+          <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              style={{ padding: 16 }}
+          >
+              <Grid item>
+              <Typography variant="h5" style={{ color: "#fff" }}>
+                  {details==='movie' ? movieItem.movieName : movieItem.movieName+` Trailer`}
+              </Typography>
+              <Typography variant="subtitle2" style={{ color: "#fff" }}>
+                  {movieItem.year} . {movieItem.limit} +
+              </Typography>
+              </Grid>
+          </Grid>
+          <Grid container direction="row" alignItems="center" justifyContent="center">
+              {elapsedTime===totalDuration ?<> <ReplayIcon onClick={onPlayPause} fontSize="large" style={{color:'#fff',cursor:'pointer'}} /></> 
+                  :
+                  <><Button
+                              onClick={onRewind}
+                              className={classes.controlIcons}
+                              aria-label="rewind"
+                          >
+                              <Replay10Icon
+                                  className={classes.controlIcons}
+                                  fontSize="inherit" />
+                          </Button><Button
+                              onClick={onPlayPause}
+                              className={classes.controlIcons}
+                              aria-label="play"
+                          >
+                                  {playing ? (
+                                      <PauseIcon fontSize="inherit" />
+                                  ) : (
+                                      <PlayArrowRoundedIcon fontSize="inherit" />
+                                  )}
+                              </Button><Button
+                                  onClick={onFastForward}
+                                  className={classes.controlIcons}
+                                  aria-label="forward"
+                              >
+                                  <Forward10Icon fontSize="inherit" />
+                              </Button></>
+          
+          
+              }
+          </Grid>
+          {/* bottom controls */}
+          <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              style={{ padding: 16 }}
+          >
+              <Grid item xs={12}>
+              <PrettoSlider
                   min={0}
                   max={100}
-                  value={muted ? 0 : volume * 100}
-                  onChange={onVolumeChange}
-                  aria-labelledby="input-slider"
-                  className={classes.volumeSlider}
+                  ValueLabelComponent={(props) => (
+                  <ValueLabelComponent {...props} value={elapsedTime} />
+                  )}
+                  aria-label="custom thumb label"
+                  value={played * 100}
+                  onChange={onSeek}
                   onMouseDown={onSeekMouseDown}
-                  onChangeCommitted={onVolumeSeekDown}
-                />
-                <Button
-                  variant="text"
-                  onClick={
-                    onChangeDispayFormat
-                    //     () =>
-                    //   setTimeDisplayFormat(
-                    //     timeDisplayFormat == "normal" ? "remaining" : "normal"
-                    //   )
-                  }
-                >
-                  <Typography
-                    variant="body1"
-                    style={{ color: "#fff", marginLeft: 16 }}
+                  onChangeCommitted={onSeekMouseUp}
+                  // onDuration={onDuration}
+                  className="slider"
+                  style={{padding:16}}
+              />
+              </Grid>
+              <div className="bottom_container" style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
+                  <div className="bottom_container_left">
+                  <Button
+                    onClick={onPlayPause}
+                    className={classes.bottomIcons}
                   >
-                    {elapsedTime}/{totalDuration}
-                  </Typography>
-                </Button>
-                </div>
-                <div className="bootom_container_right">
-                <Button
-                onClick={handleClick}
-                aria-describedby={id}
-                className={classes.bottomIcons}
-                variant="text"
-              >
-                <Typography>{playbackRate}X</Typography>
-              </Button>
+                    { elapsedTime===totalDuration ? <ReplayIcon onClick={onPlayPause} fontSize="inherit"  style={{cursor:'pointer'}} /> : playing ? (
+                      <PauseIcon fontSize="inherit" />
+                    ) : (
+                      <PlayArrowRoundedIcon fontSize="inherit" />
+                    )}
+                  </Button>
 
-              <Popover
-                container={ref.current}
-                open={open}
-                id={id}
-                onClose={handleClose}
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-              >
-                <Grid container direction="column-reverse">
-                  {[0.5, 1, 1.5, 2].map((rate) => (
-                    <Button
-                      key={rate}
-                      //   onClick={() => setState({ ...state, playbackRate: rate })}
-                      onClick={() => onPlaybackRateChange(rate)}
-                      variant="text"
+                  <Button
+                    // onClick={() => setState({ ...state, muted: !state.muted })}
+                    onClick={onMute}
+                    className={`${classes.bottomIcons} ${classes.volumeButton}`}
+                  >
+                    {muted ? (
+                      <VolumeMute fontSize="inherit" />
+                    ) : volume > 0.5 ? (
+                      <VolumeUp fontSize="inherit" />
+                    ) : (
+                      <VolumeDown fontSize="inherit" />
+                    )}
+                  </Button>
+
+                  <Slider
+                    min={0}
+                    max={100}
+                    value={muted ? 0 : volume * 100}
+                    onChange={onVolumeChange}
+                    aria-labelledby="input-slider"
+                    className={classes.volumeSlider}
+                    onMouseDown={onSeekMouseDown}
+                    onChangeCommitted={onVolumeSeekDown}
+                  />
+                  <Button
+                    variant="text"
+                    onClick={
+                      onChangeDispayFormat
+                      //     () =>
+                      //   setTimeDisplayFormat(
+                      //     timeDisplayFormat == "normal" ? "remaining" : "normal"
+                      //   )
+                    }
+                  >
+                    <Typography
+                      variant="body1"
+                      style={{ color: "#fff", marginLeft: 16 }}
                     >
-                      <Typography
-                        color={rate === playbackRate ? "secondary" : "inherit"}
-                      >
-                        {rate}X
-                      </Typography>
-                    </Button>
-                  ))}
-                </Grid>
-              </Popover>
-              <Button
-                onClick={()=>{onToggleFullScreen();handletoggle()}}
-                className={classes.bottomIcons}
-              >
-                {toggle ?  <CloseFullscreenIcon fontSize="inherit" /> :<OpenInFullIcon fontSize="inherit" /> }
-              </Button>
-                </div>
-            </div>
+                      {elapsedTime}/{totalDuration}
+                    </Typography>
+                  </Button>
+                  </div>
+                  <div className="bootom_container_right">
+                  <Button
+                  onClick={handleClick}
+                  aria-describedby={id}
+                  className={classes.bottomIcons}
+                  variant="text"
+                >
+                  <Typography>{playbackRate}X</Typography>
+                </Button>
 
-        </Grid>
-        </Grid>
-    </div>
+                <Popover
+                  container={ref.current}
+                  open={open}
+                  id={id}
+                  onClose={handleClose}
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  transformOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                >
+                  <Grid container direction="column-reverse">
+                    {[0.5, 1, 1.5, 2].map((rate) => (
+                      <Button
+                        key={rate}
+                        //   onClick={() => setState({ ...state, playbackRate: rate })}
+                        onClick={() => onPlaybackRateChange(rate)}
+                        variant="text"
+                      >
+                        <Typography
+                          color={rate === playbackRate ? "secondary" : "inherit"}
+                        >
+                          {rate}X
+                        </Typography>
+                      </Button>
+                    ))}
+                  </Grid>
+                </Popover>
+                <Button
+                  onClick={()=>{onToggleFullScreen();handletoggle()}}
+                  className={classes.bottomIcons}
+                >
+                  {toggle ?  <CloseFullscreenIcon fontSize="inherit" /> :<OpenInFullIcon fontSize="inherit" /> }
+                </Button>
+                  </div>
+              </div>
+
+          </Grid>
+          </Grid>
+      </div>
+      </>
+    }
+    </>
     );
 }
 );

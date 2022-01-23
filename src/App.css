@@ -7,5 +7,11 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body,html{
-  background-color: #131927;
+  background-color: var(--bg-color);
+}
+:root{
+  --bg-color:#091540ff;
+  --text-color:#f7f7ffff;
+  --btn-color:#3772ffff;
+  --red-color:#c1292eff;
 }

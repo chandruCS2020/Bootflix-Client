@@ -1,7 +1,7 @@
 nav{
     height:60px;
     width: 100%;
-    background-color: #131927;
+    background-color: var(--bg-color);
     color: white;
     position: sticky;
     z-index: 100000;
@@ -33,7 +33,7 @@ nav{
     height: auto;
     max-height: 0;
     border-radius: 2px;
-    background-color: #192133;
+    background-color: var(--bg-color);
     position: absolute;
     overflow: hidden;
     display: block;
@@ -74,7 +74,7 @@ nav{
     font-size: 1.2rem;
     letter-spacing: 1px;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-color);
 }
 .navbar_header_desktop .navbar_logo img{
     width: 150px;
@@ -131,7 +131,7 @@ nav{
 .navbar_header_desktop .subscribe-btn{
     font-size: 14px;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-color);
     padding: 15px 18px 15px;
     border-radius: 3px;
     text-align: center;
@@ -153,9 +153,9 @@ nav{
     cursor: pointer;
 }
 .navbar_header_desktop  .subscribe-btn.upgrade{
-    color:#1f80e0;
+    color:var(--btn-color);
     background: transparent;
-    border: 1px solid #1f80e0;
+    border: 1px solid var(--btn-color);
 }
 .navbar_header_desktop .user-profile{
     margin-left: 10px;
@@ -190,7 +190,7 @@ nav{
     max-height: 0;
     height: auto;
     border-radius: 4px;
-    background-color: #192133;
+    background-color: var(--bg-color);
     position: absolute;
     overflow: hidden;
     top: 58px;
@@ -284,7 +284,7 @@ nav{
 .search-container input[type='search']:focus{
     width: 360px;
     border-color: #334366;
-    color: #fff;
+    color: var(--text-color);
 }
 .search-container input[type='search']::-webkit-search-cancel-button{
     display: none;
@@ -293,7 +293,7 @@ nav{
     display: none;
 }
 .react-responsive-modal-modal{
-    background-color: #131927!important;
+    background-color: var(--bg-color)!important;
     border-radius: 10px;
 }
 .react-responsive-modal-closeButton { 
@@ -301,7 +301,7 @@ nav{
     border: 0;
 }
 .react-responsive-modal-closeButton svg{
-    color: #1f80e0;
+    color: var(--btn-color);
     font-size: 2rem;
 }
 @media screen and (max-width:1100px) {
@@ -344,6 +344,11 @@ nav{
         width: 120px;
         margin-top: 5px;
     }
+    .navbar_userprofile_mobile img{
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
     .navbar_header_mobile .subscribe-btn{
         font-size: 14px;
         font-weight: 500;
@@ -352,7 +357,7 @@ nav{
         border-radius: 3px;
         text-align: center;
         text-transform: uppercase;
-        background: #1f80e0;
+        background: var(--btn-color);
         border: none;
         outline: 0;
         outline-color: transparent;
@@ -369,9 +374,9 @@ nav{
         cursor: pointer;
     }
     .navbar_header_mobile .subscribe-btn.upgrade{
-        color:#1f80e0;
+        color:var(--btn-color);
         background: transparent;
-        border: 1px solid #1f80e0;
+        border: 1px solid var(--btn-color);
     }
     .navbar_header_mobile :not(.right-element)+.right-element{
         margin-left: auto;
@@ -462,4 +467,15 @@ nav{
         width: 70%;
     }
     
+}
+@media screen and (max-width:460px) {
+    .navbar_header_mobile .navbar_logo_mobile img{
+        width: 80px;
+    }
+    .navbar_header_mobile .searchBar_mobile svg{
+        font-size: 1.5rem;
+    }
+    .navbar_header_mobile .subscribe-btn{
+        margin: 10px 0px 15px 15px;
+    }
 }

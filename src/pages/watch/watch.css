@@ -3,7 +3,7 @@
 }
 .movieWatch{
     padding: 30px 40px;
-    color: #fff;
+    color: var(--text-color);
 }
 .movieWatchDesc > *{
     margin-bottom: 10px;
@@ -15,7 +15,7 @@
 .movieWatchAll a{
     font-weight: 700!important;
     text-transform: capitalize;
-    color: #1C6AAF;
+    color: var(--btn-color);
 }
 .movieWatchAll,.movieWatchDesc{
     color: #ddd;
@@ -30,7 +30,7 @@
     color: #ddd;
 }
 .movieWatchlistBtn:hover{
-    color: #fff;
+    color: var(--text-color);
 }
 .movieWatchlistBtn div{
     display: flex;

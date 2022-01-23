@@ -1,0 +1,24 @@
+.genreWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 20px;
+}
+.genre{
+    padding: 50px;
+}
+.genreTitle{
+    margin-bottom: 20px;
+    color: #fff;
+}
+.nodataFound{
+    color: #ddd;
+    font-size: 1.5rem;
+}
+.noData{
+    width: 100%;
+    height: calc(100vh - 220px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
