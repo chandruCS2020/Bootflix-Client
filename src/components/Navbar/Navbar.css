@@ -3,7 +3,7 @@ nav{
     width: 100%;
     background-color: var(--bg-color);
     color: white;
-    position: sticky;
+    position: fixed!important;
     z-index: 100000;
     top: 0;
 }
