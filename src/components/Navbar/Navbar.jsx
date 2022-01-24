@@ -8,7 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import HelpIcon from '@mui/icons-material/Help';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import LoginIcon from '@mui/icons-material/Login';
 import logo from '../../images/logo.png';
 import 'react-responsive-modal/styles.css';
@@ -46,6 +46,7 @@ function Navbar(props) {
         }
         getData();
     }
+    console.log(searchResult);
     const handlesearchBarClick = ()=>{
 
     }
@@ -104,6 +105,8 @@ function Navbar(props) {
                                 <div className="dropdown-container">
                                     <AccountCircleIcon />
                                     <div className="sublink-container slide-up">
+                                        <Link to='/wishlist'>Wishlist</Link>
+                                        <Link to='/myaccount'>MyAccount</Link>
                                         <div onClick={()=>logout()} className="dropdown-link">Log Out</div>
                                     </div>
                                 </div>
@@ -132,7 +135,7 @@ function Navbar(props) {
                     <div className={`navbar_menuItems_mobile ${mobilemenuClick ? `active` : ``}`}>
                         <div className="navbar_menuItems_user_mobile">
                             <div className="navbar_userprofile_mobile">
-                                <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" />
+                                {/* <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" /> */}
                             </div>
                             {isUser ?
                                 <div className="navbar_userdetails_mobile">

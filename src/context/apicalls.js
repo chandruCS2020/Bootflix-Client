@@ -37,4 +37,15 @@ export const WishList = async(id)=>{
     }catch(err){
         console.log(err.message);
     }
-}
+};
+
+export const RemoveWishList = async(id)=>{
+    try{
+        const res = await axios.get("https://apibootflix.herokuapp.com/removeMovieFromWhislist/"+id,{withCredentials:true});
+        if(res.status===200){
+            window.location.reload();
+        }
+    }catch(err){
+        console.log(err.message);
+    }
+};

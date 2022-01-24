@@ -60,7 +60,7 @@ export default function FeatureList() {
                     <>
                         <Slider {...settings}>
                             {movieItem.map((item,index)=>(
-                                <Link to={item._id} key={index}><FeatureItems item={item}   /></Link>
+                                <Link to={'movie/'+item._id} key={index}><FeatureItems item={item}   /></Link>
                             ))}
                         </Slider>
                     </>

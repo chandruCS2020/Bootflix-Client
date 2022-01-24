@@ -9,7 +9,8 @@ import Trailer from '../../components/trailer/Trailer';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import WatchItem from '../../components/watchItem/WatchItem';
-import { WishList } from '../../context/apicalls';
+import { RemoveWishList, WishList } from '../../context/apicalls';
+import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 export default function Watch() {
     const location = useLocation();
     const movieId=location.pathname.split('/')[2];
@@ -32,16 +33,22 @@ export default function Watch() {
     }, []);
     console.log(movieItem);
     
-    // const genre=location.pathname.split('/');
-    // let history= useHistory();
-    // console.log(history)
-    // console.log(genre[3]);
-    // useEffect(() => {
-    //     window.onbeforeunload = ()=>{
-    //         // localStorage.setItem("user","fhfc");
-    //     }
-    // }, [location])
-    console.log()
+    const [data, setdata] = useState([]);
+    useEffect(() => {
+        const data = async()=>{
+            try{
+                const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
+                setdata(res.data);
+            }catch(err){
+                console.log(err.message);
+            }
+        }
+        data();
+    }, []);
+    const movieIds = Object.keys(data);
+    console.log(movieIds);
+    const added = movieIds.find(element => element===movieItem._id);
+    const [addedIcon, setaddedIcon] = useState(false);
     
     return (
         <>
@@ -65,7 +72,7 @@ export default function Watch() {
                                 <p className="movieWatchDesc">{movieItem.movieDesc}</p>
                             </div>
                             <div className="movieWatchShare">
-                                <div className="movieWatchlistBtn" onClick={()=>WishList(movieItem._id)}><div><AddIcon /><div>Watchlist</div></div></div>
+                                {movieItem._id===added || addedIcon ? <div className="movieWatchlistBtn" onClick={()=>{RemoveWishList(movieItem._id);setaddedIcon(false)}}><div><DownloadDoneIcon className='tick'/><div>Watchlist</div></div></div> :<div className="movieWatchlistBtn" onClick={()=>{WishList(movieItem._id);setaddedIcon(true)}}><div><AddIcon /><div>Watchlist</div></div></div>}
                             </div>
                             <hr />
                             <div className="trailerBox">

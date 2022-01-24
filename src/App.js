@@ -23,7 +23,7 @@ function App() {
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/subscribe' component={Subscribe} />
-            <Route path='/watchlist' component={Watchlist} />
+            <Route path='/wishlist' component={Watchlist} />
             <Route path='/movie/:id/watch' component={VideoPlayer} />
             <Route path='/trailer/:id/watch' component={VideoPlayer} />
             <Route path='/movie/:id' component={Watch} />
