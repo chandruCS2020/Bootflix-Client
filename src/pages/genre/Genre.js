@@ -18,7 +18,7 @@ export default function Genre() {
             }
         }
         getData();
-    }, []);
+    }, [genre]);
     console.log(genreList);
     return(
         <>
@@ -28,7 +28,7 @@ export default function Genre() {
                 {genreList.length<=0 ? 
                     <>
                         <div className="noData">
-                            <h1 className="nodataFound">No Data Found</h1>
+                            <h1 className="nodataFound">No Movie Found</h1>
                         </div>
                     </>
                     :

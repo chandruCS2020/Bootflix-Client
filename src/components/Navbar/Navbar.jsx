@@ -47,6 +47,10 @@ function Navbar(props) {
         getData();
     }
     console.log(searchResult);
+    if(isUser){
+        const response=fetch(JSON.parse(localStorage.getItem('user')).profilePic,{method:'get',mode:'no-cors'})
+        console.log(response);
+    }
     const handlesearchBarClick = ()=>{
 
     }
@@ -74,13 +78,17 @@ function Navbar(props) {
                                             <div>Categories</div>
                                         </NavLink>
                                         <div className="sublink-container slide-up">
-                                            <NavLink to='/categories/action' className='dropdown-link'>Action</NavLink>
-                                            <NavLink to='/categories/thriller' className='dropdown-link'>Thriller</NavLink>
-                                            <NavLink to='/categories/sci-fi' className='dropdown-link'>Sci Fi</NavLink>
-                                            <NavLink to='/categories/drama' className='dropdown-link'>Drama</NavLink>
-                                            <NavLink to='/categories/crime' className='dropdown-link'>Crime</NavLink>
-                                            <NavLink to='/categories/fantacy-adventure' className='dropdown-link'>Fantacy Adventure</NavLink>
-                                            <NavLink to='/categories/kids' className='dropdown-link'>Kids</NavLink>
+                                            <NavLink to='/genre/Action' className='dropdown-link'>Action</NavLink>
+                                            <NavLink to='/genre/Thriller' className='dropdown-link'>Thriller</NavLink>
+                                            <NavLink to='/genre/Sci-Fi' className='dropdown-link'>Sci Fi</NavLink>
+                                            <NavLink to='/genre/Drama' className='dropdown-link'>Drama</NavLink>
+                                            <NavLink to='/genre/Crime' className='dropdown-link'>Crime</NavLink>
+                                            <NavLink to='/genre/Fantacy' className='dropdown-link'>Fantacy</NavLink>
+                                            <NavLink to='/genre/Sports' className='dropdown-link'>Sports</NavLink>
+                                            <NavLink to='/genre/Comedyt' className='dropdown-link'>Comedy</NavLink>
+                                            <NavLink to='/genre/Horror' className='dropdown-link'>Horror</NavLink>
+                                            <NavLink to='/genre/Mystery' className='dropdown-link'>Mystery</NavLink>
+                                            <NavLink to='/genre/Romance' className='dropdown-link'>Romance</NavLink>
                                         </div>
                                     </div>
                                 </li>
@@ -103,7 +111,9 @@ function Navbar(props) {
                         <div className="right-element user-profile">
                             {localStorage.getItem('user') ?<div className="user-pic">
                                 <div className="dropdown-container">
-                                    <AccountCircleIcon />
+                                    <div className="navbar_userprofile_mobile">
+                                            <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" />
+                                        </div>
                                     <div className="sublink-container slide-up">
                                         <Link to='/wishlist'>Wishlist</Link>
                                         <Link to='/myaccount'>MyAccount</Link>
@@ -134,13 +144,17 @@ function Navbar(props) {
                     </div>
                     <div className={`navbar_menuItems_mobile ${mobilemenuClick ? `active` : ``}`}>
                         <div className="navbar_menuItems_user_mobile">
-                            <div className="navbar_userprofile_mobile">
-                                {/* <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" /> */}
-                            </div>
+                            
                             {isUser ?
-                                <div className="navbar_userdetails_mobile">
-                                    <h3>{JSON.parse(localStorage.getItem('user')).firstName} {JSON.parse(localStorage.getItem('user')).lastName}</h3>
-                                </div> :
+                                <>
+                                    <div className="navbar_userprofile_mobile">
+                                        <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" />
+                                    </div>
+                                    <div className="navbar_userdetails_mobile">
+                                        <h3>{JSON.parse(localStorage.getItem('user')).firstName} {JSON.parse(localStorage.getItem('user')).lastName}</h3>
+                                    </div>
+                                </>
+                                :
                                 <div className="navbar_userdetails_mobile">
                                     <h3>Login To Explore</h3>
                                 </div>

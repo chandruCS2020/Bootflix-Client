@@ -11,6 +11,7 @@ import Myaccount from './pages/myaccount/Myaccount';
 import Login from './pages/login/Login';
 import VideoPlayer from './components/Player/VideoPlayer';
 import Genre from './pages/genre/Genre';
+import LogoutAll from './pages/logout/LogoutAll';
 
 function App() {
   const { isUser,dispatch } = useContext(AuthContext);
@@ -30,6 +31,7 @@ function App() {
             <Route path='/myaccount' component={Myaccount} />
             <Route path='/login' component={Login} />
             <Route path='/genre/:genre' component={Genre} />
+            <Route path='/logoutall' component={LogoutAll} />
           </Switch>
       </Router>
     </div>

@@ -6,6 +6,7 @@ import logo from '../../images/logo.png'
 import { useHistory, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { logout } from '../../context/apicalls';
 
 export default function Myaccount() {
     const history = useHistory();
@@ -53,10 +54,10 @@ export default function Myaccount() {
                             }
                             <div onClick={handleSubscribeLink} className="subscribe_btn">{JSON.parse(localStorage.getItem('user')).plan.plan==='Free'?`Subscribe`:`Upgrade Plan`}</div>
                         </div>
-                        <div className="logoutUser" onClick={(e)=>{console.log("hvdd")}}>
+                        <div className="logoutUser" onClick={(e)=>{logout()}}>
                             <div className="logoutBtn">Logout</div>
                         </div>
-                        <div className="logoutUser" onClick={(e)=>{console.log("dhjhdsxhjv")}}>
+                        <div className="logoutUser" onClick={(e)=>{history.push('/logoutall')}}>
                             <div className="logoutBtn">Logout All</div>
                         </div>
                     </div>

@@ -15,6 +15,7 @@
     width: 100%;
     height: calc(100vh - 60px);
     background-color: var(--bg-color);
+    padding-top: 60px;
 }
 .Myaccount_body{
     margin: 0 auto;

@@ -304,6 +304,7 @@ nav{
     color: var(--btn-color);
     font-size: 2rem;
 }
+.navbar_userprofile_mobile img{width: 40px;border-radius: 50%;}
 @media screen and (max-width:1100px) {
     .navigation{
         display: none;

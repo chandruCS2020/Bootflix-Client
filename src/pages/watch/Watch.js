@@ -61,7 +61,7 @@ export default function Watch() {
                             <div className="movieWatchDesc">
                                 <h1 className="movieWatchTitle">{movieItem.movieName}</h1>
                                 <p className='movieWatchAll'>
-                                    <span>{movieItem.genre.map((items,i)=>(<Link to={'/'+items} key={i}>{items}{i!==movieItem.genre.length-1?",":""}</Link>))}</span>
+                                    <span>{movieItem.genre.map((items,i)=>(<Link to={'/genre/'+items} key={i}>{items}{i!==movieItem.genre.length-1?",":""}</Link>))}</span>
                                     <span> . </span>
                                     <span><Link to='/'>{movieItem.language}</Link></span>
                                     <span> . </span>

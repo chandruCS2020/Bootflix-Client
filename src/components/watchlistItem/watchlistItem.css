@@ -1,5 +1,5 @@
 .watchlist_container{
-    margin: 0 7px 14px;
+    margin: 0 14px 14px 0px;
     width: calc((100vw - 45px) * .183);
     height: 180px;
     /* margin: 10px; */
@@ -9,6 +9,7 @@
     transition: all 0.5s ;
     cursor: pointer;
     color: var(--text-color);
+    background-color:darkblue;
 }
 .watchlist_container:hover{
     transform: scale(1.2);
