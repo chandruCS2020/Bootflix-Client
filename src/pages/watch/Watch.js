@@ -34,20 +34,25 @@ export default function Watch() {
     console.log(movieItem);
     
     const [data, setdata] = useState([]);
-    useEffect(() => {
-        const data = async()=>{
-            try{
-                const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
-                setdata(res.data);
-            }catch(err){
-                console.log(err.message);
-            }
-        }
-        data();
-    }, []);
-    const movieIds = Object.keys(data);
-    console.log(movieIds);
-    const added = movieIds.find(element => element===movieItem._id);
+    // useEffect(() => {
+    //     const data = async()=>{
+    //         try{
+    //             const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
+    //             setdata(res.data);
+    //         }catch(err){
+    //             console.log(err.message);
+    //         }
+    //     }
+    //     data();
+    // }, []);
+    let data1 =[];
+    var movieIds = '';
+    var added = '';
+    if(isUser){
+        data1 = JSON.parse(localStorage.getItem('user')).whislist;
+        movieIds = Object.keys(JSON.parse(data1));
+        added = movieIds.find(element => element===item._id);
+    }
     const [addedIcon, setaddedIcon] = useState(false);
     
     return (
