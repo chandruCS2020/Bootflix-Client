@@ -22,7 +22,8 @@ import CloseFullscreenIcon from '@mui/icons-material/CloseFullscreen';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import ReplayIcon from '@mui/icons-material/Replay';
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import { Beforeunload } from "react-beforeunload";
 const useStyles = makeStyles((theme) => ({
 controlsWrapper: {
     visibility: "hidden",
@@ -103,7 +104,6 @@ rail: {
 
 function ValueLabelComponent(props) {
 const { children, open, value } = props;
-
 return (
     <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
     {children}
@@ -117,7 +117,6 @@ const Controls = forwardRef(
     onSeek,
     onSeekMouseDown,
     onSeekMouseUp,
-    onDuration,
     onRewind,
     onPlayPause,
     onFastForward,
@@ -134,7 +133,6 @@ const Controls = forwardRef(
     onToggleFullScreen,
     volume,
     onVolumeChange,
-    onBookmark,
     movieId,
     },
     ref
@@ -154,11 +152,7 @@ const Controls = forwardRef(
     const handletoggle = ()=>{
         settoggle(!toggle);
     }
-    // if(elapsedTime===totalDuration){
-    //     setreplay(true)
-    // }else{
-    //     setreplay(false)
-    // }
+    
     const [movieItem, setmovieItem] = useState([]);
     const [loading, setloading] = useState(false);
     const location = useLocation();
@@ -178,6 +172,15 @@ const Controls = forwardRef(
         }
         data();
     }, []);
+    const history = useHistory();
+    const [Time, setTime] = useState('');
+    useEffect(() => {
+      setTime(elapsedTime);
+    }, [elapsedTime]);
+    // console.log(Time);
+    
+    
+    
     
     return (
     <>

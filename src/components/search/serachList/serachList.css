@@ -1,0 +1,66 @@
+.searchList{
+    width: 360px;
+    overflow: hidden;
+}
+.search{
+    position: absolute;
+    background-color: var(--bg-color);
+    padding: 5px;
+}
+.search h1{
+    width: 360px;
+    padding: 20px;
+    font-size: 1rem;
+    text-align: center;
+}
+.searchList.more{
+    height: 470px;
+}
+.moreBtn{
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    background-color: var(--btn-color);
+    cursor: pointer;
+    border-radius: 5px;
+    color: var(--text-color);
+    display: none;
+}
+.moreBtn.more{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.search.mobile{
+    display: none;
+}
+@media screen and (max-width:1100px) {
+    .searchList{
+        width: 300px;
+    }
+}
+@media screen and (max-width:990px){
+    .searchList{
+        display: flex;
+        padding-top: 30px;
+        width: 100%;
+        flex-wrap: wrap;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+    .search.mobile{
+        display: block;
+        padding: 20px;
+    }
+    .search.desktop{
+        display: none;
+    }
+    .search.mobile .searchList.mobile{
+        overflow-y:scroll ;
+    }
+}
+@media screen and (max-width:675px) {
+    .search.mobile{
+        padding: 0;
+    }
+}

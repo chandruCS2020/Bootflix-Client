@@ -56,3 +56,8 @@
 .tick{
     color: skyblue!important;
 }
+@media screen and (max-width:465px) {
+    .listItem .listItemInfo,.listItem .listItemBackground{
+        display: block;
+    }
+}

@@ -18,6 +18,11 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { AuthContext } from '../../context/AuthContext';
 import { logout } from '../../context/apicalls';
 import axios from 'axios';
+import SerachList from '../search/serachList/SerachList';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import MovieIcon from '@mui/icons-material/Movie';
+import ViewList from '@mui/icons-material/ViewList';
 function Navbar(props) {
     const [mobilemenuClick, setmobilemenuClick] = useState(false);
     const [open, setOpen] = useState(false);
@@ -34,28 +39,40 @@ function Navbar(props) {
     }else{
         subscription=JSON.parse(localStorage.getItem('user')).plan.plan;
     }
-    const [searchResult, setsearchResult] = useState(null);
+    const [searchResult, setsearchResult] = useState([]);
+    const [searchLoading, setsearchLoading] = useState(false);
+    const [search, setsearch] = useState('');
     const handelSearchChange = (e)=>{
-        const getData = async()=>{
-            try{
-                const res = await axios.get('https://apibootflix.herokuapp.com/list-movies?search='+e.target.value);
-                setsearchResult(res.data.result);
-            }catch(err){
-                console.log(err.message);
+        setsearch(e.target.value);
+        if(e.target.value!==''){
+            const getData = async()=>{
+                try{
+                    const res = await axios.get('https://apibootflix.herokuapp.com/list-movies?search='+e.target.value);
+                    setsearchResult(res.data.result);
+                    if(res.status===200){
+                        setsearchLoading(true);
+                    }
+                }catch(err){
+                    setsearchLoading(false);
+                    console.log(err.message);
+                }
             }
+            getData();
+        }else{
+            setsearchResult([]);
+            setsearchLoading(false)
         }
-        getData();
     }
-    console.log(searchResult);
     if(isUser){
         const response=fetch(JSON.parse(localStorage.getItem('user')).profilePic,{method:'get',mode:'no-cors'})
         console.log(response);
     }
+    const [searchMobile, setsearchMobile] = useState(false);
     const handlesearchBarClick = ()=>{
-
+        setsearchMobile(!searchMobile);
     }
     return (
-        <>
+        <div className='navs'>
             <nav>
                 <div className="navbar_header_desktop">
                         <div className="navbar_logo">
@@ -67,7 +84,7 @@ function Navbar(props) {
                             <ul>
                                 <li>
                                     <div className="dropdown-container">
-                                        <NavLink className="nav-link" to='/movies'>
+                                        <NavLink className="nav-link" to='/movie'>
                                             <div>Movies</div>
                                         </NavLink>
                                     </div>
@@ -105,6 +122,7 @@ function Navbar(props) {
                             <div className="searchIcon  searchIcon-active">
                                 <SearchIcon />
                             </div>
+                            {searchLoading && <SerachList item={searchResult} query={search}/>}
                         </div>
                         {/* <button className="subscribe-btn right-element upgrade">Music Player</button> */}
                         {subscription!=='Free' ?  <NavLink to='/subscribe' className="subscribe-btn right-element upgrade">upgrade</NavLink> : <NavLink to='/subscribe' className="subscribe-btn right-element subscribe">Subscribe</NavLink>}
@@ -112,7 +130,7 @@ function Navbar(props) {
                             {localStorage.getItem('user') ?<div className="user-pic">
                                 <div className="dropdown-container">
                                     <div className="navbar_userprofile_mobile">
-                                            <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="" />
+                                            <img src={JSON.parse(localStorage.getItem('user')).profilePic} alt="profile" />
                                         </div>
                                     <div className="sublink-container slide-up">
                                         <Link to='/wishlist'>Wishlist</Link>
@@ -163,15 +181,15 @@ function Navbar(props) {
                         <div className="navbar_dropdownList_mobile">
                             <ul>
                                 <li>
-                                    <NavLink to='/language'>
+                                    <NavLink to='/movie'>
                                         <div className="iconClass Language">
-                                            <TranslateIcon />
+                                            <MovieIcon />
                                         </div>
-                                        <div>Language</div>
+                                        <div>Movie</div>
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/genres'>
+                                    <NavLink to='/genre'>
                                         <div className="iconClass Genres">
                                             <ImportContactsIcon />
                                         </div>
@@ -179,11 +197,19 @@ function Navbar(props) {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/help'>
+                                    <NavLink to='/wishlist'>
                                         <div className="iconClass Help">
-                                            <HelpIcon />
+                                            <ViewList />
                                         </div>
-                                        <div>Help</div>
+                                        <div>Watchlist</div>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/myaccount'>
+                                        <div className="iconClass Help">
+                                            <AccountCircleIcon />
+                                        </div>
+                                        <div>My Account</div>
                                     </NavLink>
                                 </li>
                                 <li>
@@ -214,9 +240,20 @@ function Navbar(props) {
                             }
                         </div>
                     </div>
+                    
                 </div>
             </nav>  
-        </>
+            <div className={`searchContainer_mobile ${searchMobile ? `active` : ''}`}>
+                        <div className="back" onClick={()=>setsearchMobile(!searchMobile)}><ArrowBackIcon /></div>
+                        <div className="searchInput">
+                            <input type="search" name="search" id="" placeholder='Search' onChange={handelSearchChange}/>
+                            <div className="searchIcon  searchIcon-active">
+                                <SearchIcon />
+                            </div>
+                        </div>
+                        {searchLoading && <SerachList item={searchResult} query={search}/>}
+                    </div>
+        </div>
     )
 }
 

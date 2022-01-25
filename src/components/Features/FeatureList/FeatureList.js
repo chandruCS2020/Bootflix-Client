@@ -42,7 +42,7 @@ export default function FeatureList() {
         const data = async()=>{
             try{
                 const res = await axios.get('https://apibootflix.herokuapp.com/list-movies');
-                setmovieItem(res.data.result.slice(0,5));
+                setmovieItem(res.data.result.reverse().slice(0,5));
                 if(res.status===200){
                     setloading(true);
                 }

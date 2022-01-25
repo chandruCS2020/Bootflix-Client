@@ -6,17 +6,17 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 export default function List({list}) {
     const listRef = useRef();
     const [slideNumber, setslideNumber] = useState(0);
-    const slide = list.value.length/2;
+    const slide = list.value.length - 8;
     const handleClick = (direction) =>{
         let distance = listRef.current.getBoundingClientRect().x - 60;
         console.log(distance);
         if(direction ==='left' && slideNumber>0){
             setslideNumber(slideNumber-1);
-            listRef.current.style.transform = `translateX(${170 + distance}px)`
+            listRef.current.style.transform = `translateX(${210 + distance}px)`
         }
         if(direction ==='right' && slideNumber <slide){
             setslideNumber(slideNumber+1);
-            listRef.current.style.transform = `translateX(${-170 + distance}px)`
+            listRef.current.style.transform = `translateX(${-190 + distance}px)`
         }
     };
     return (
@@ -29,7 +29,7 @@ export default function List({list}) {
                         <ListItem item={item} key={i}/>
                     ))}
                 </div>
-                {slideNumber<slide  && <ArrowForwardIosRoundedIcon className={`listSliderArrow right ${slide>=9 && `show`}`} onClick={()=>handleClick("right")} />}
+                {slideNumber<slide  && <ArrowForwardIosRoundedIcon className={`listSliderArrow right ${slide>0 && `show`}`} onClick={()=>handleClick("right")} />}
             </div>
             
         </div>

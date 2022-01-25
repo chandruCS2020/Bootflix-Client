@@ -9,7 +9,7 @@
     transition: all 0.5s ;
     cursor: pointer;
     color: var(--text-color);
-    background-color:darkblue;
+    background-color:#131927;
 }
 .watchlist_container:hover{
     transform: scale(1.2);

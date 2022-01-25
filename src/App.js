@@ -32,6 +32,9 @@ function App() {
             <Route path='/login' component={Login} />
             <Route path='/genre/:genre' component={Genre} />
             <Route path='/logoutall' component={LogoutAll} />
+            <Route path='/search' component={Genre} />
+            <Route path='/movie' component={Genre} />
+            <Route path='/genre' component={Genre} />
           </Switch>
       </Router>
     </div>

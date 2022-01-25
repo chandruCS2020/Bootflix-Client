@@ -25,7 +25,7 @@ export default function Watchlists() {
             <div className="watchlist">
                 <Navbar  isloggedin={false} isSubscribed={false} />
                 <div className="watchlistPage_container">
-                    <div className="watchlist_title"><h1 className="watchlist_titlehead">Watchlist</h1></div>
+                    <div className="watchlist_title"><h1 className="watchlist_titlehead">Wishlist</h1></div>
                     {
                     movieIds.length<=0
                         ?

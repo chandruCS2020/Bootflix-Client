@@ -14,7 +14,7 @@ export default function FeatureItems({item}) {
                                     {item.language}
                                 </span>
                                 <span className="movie_genre">
-                                    {item.genre}
+                                {item.genre.map((items,i)=>(<span key={i}>{items}{i!==item.genre.length-1?",":""}</span>))}
                                 </span>
                             </p>
                             <p className="movie_description">{item.movieDesc}</p>

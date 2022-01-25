@@ -7,9 +7,14 @@ import { Link } from 'react-router-dom';
 import { WishList } from '../../context/apicalls';
 import axios from 'axios';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import { RemoveWishList } from '../../context/apicalls';
 export default function ListItem({item}) {
     const [data, setdata] = useState([]);
     useEffect(() => {
+        var d=document.querySelectorAll('.my-anchor-css-class');
+        for (let i = 0; i < d.length; i++) {
+            d[i].remove();
+        }
         const data = async()=>{
             try{
                 const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
@@ -21,7 +26,6 @@ export default function ListItem({item}) {
         data();
     }, []);
     const movieIds = Object.keys(data);
-    console.log(movieIds);
     const added = movieIds.find(element => element===item._id);
     const [addedIcon, setaddedIcon] = useState(false);
     return (
@@ -33,8 +37,10 @@ export default function ListItem({item}) {
                         <div className="listItemBackground"></div>
                         <div className="listItemInfo">
                             <div className="listItemsIcon">
-                                <PlayCircleOutlineIcon />
-                                {item._id===added || addedIcon ? <DownloadDoneIcon className='tick'/>:<span onClick={()=>{WishList(item._id);setaddedIcon(true)}} style={{zIndex:5}}><AddIcon /></span>}
+                                <Link to={`/movie/${item._id}`}>
+                                    <PlayCircleOutlineIcon />
+                                </Link>
+                                {item._id===added || addedIcon ? <span onClick={()=>{RemoveWishList(item._id);setaddedIcon(true)}}><DownloadDoneIcon className='tick'/></span>:<span onClick={()=>{WishList(item._id);setaddedIcon(true)}} style={{zIndex:5}}><AddIcon /></span>}
                             </div>
                             <Link to={`/movie/${item._id}`}>
                                 <div className="listItemMovie">
@@ -46,6 +52,8 @@ export default function ListItem({item}) {
                                 <ShowMoreText
                                 lines={2}
                                 className="listItemDesc"
+                                anchorClass="my-anchor-css-class"
+                                expanded={false}
                                 truncatedEndingComponent={"... "}
                             >{item.movieDesc}</ShowMoreText>
                             </Link>

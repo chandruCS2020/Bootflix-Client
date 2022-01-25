@@ -1,0 +1,52 @@
+.searchItem{
+    width: 100%;
+    height: 80px;
+    margin-bottom: 6px;
+    background-color: #192133;
+    display: flex;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.searchLeft,.searchRight{
+    width: 50%;
+}
+.searchItem img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+.searchRight{
+    padding: 10px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+.searchDesc{
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+@media screen and (max-width:1100px) {
+    .searchRight{
+        font-size: 1rem;
+    }
+    .searchDesc{
+        font-size: 0.7rem;
+    }
+}
+@media screen and (max-width:990px){
+    .searchItem{
+        height: 100px;
+        width: 370px;
+    }
+    .searchRight{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+}
+@media screen and (max-width:675px){
+    .searchItem{
+        width: 330px;
+    }
+}

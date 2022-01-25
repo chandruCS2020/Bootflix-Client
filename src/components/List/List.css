@@ -46,3 +46,11 @@
 .listSliderArrow.right.show{
     display: block;
 }
+@media screen and (max-width:990px) {
+    .listSliderArrow.right{
+        display: block;
+    }
+    .listWrapper .listSliderArrow{
+        opacity: 1;
+    }
+}

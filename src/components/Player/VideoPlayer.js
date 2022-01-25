@@ -3,13 +3,16 @@ import ReactPlayer from "react-player";
 import { makeStyles} from "@material-ui/core/styles";
 import Controls from '../PlayerControl/Controls';
 import screenful from 'screenfull';
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     playerWrapper: {
-        position: "relative",
-        width:'100%',
-        overflow:'hidden'
+        position: 'relative',
+        display: 'flex',
+        width: 'auto',
+        height: '100vh',
+        overflow: 'hidden',
     },
     // reactPlayer:{
     //     position: 'absolute',
@@ -98,7 +101,7 @@ export default function VideoPlayer() {
     const details = location.pathname.split('/')[1];
     const [state, setState] = useState({
     pip: false,
-    playing: false,
+    playing: true,
     controls: false,
     light: false,
 
@@ -219,17 +222,55 @@ export default function VideoPlayer() {
         ? playerRef.current.getCurrentTime()
         : "00:00";
 
-    const duration =
-    playerRef && playerRef.current ? playerRef.current.getDuration() : "00:00";
+    const duration = playerRef && playerRef.current ? playerRef.current.getDuration() : "00:00";
     const elapsedTime =
     timeDisplayFormat === "normal"
         ? format(currentTime)
         : `-${format(duration - currentTime)}`;
 
     const totalDuration = format(duration);
-  
+    const history = useHistory();
+    const [Time, setTime] = useState('');
+    useEffect(() => {
+        setTime(elapsedTime);
+    }, [elapsedTime]);
+    useEffect(() => {
+        const data= document.getElementById('tsss');
+        const dd=document.getElementById('dura');
+        // var video = document.querySelector('video').duration;
+        const video = document.getElementsByClassName('reactPlayer');
+        console.log(video);
+        history.listen((location)=>{
+            const datas={};
+            datas['movieId']=id;
+            datas['curTime']=data.value;
+            datas['totalTime']=dd.value;
+            console.log(datas);
+            const sendData = async()=>{
+                try{
+                    const res = await axios.get(`https://apibootflix.herokuapp.com/addToHistory?movieId=${id}&&curTime=${data.value.toString()}&&totalTime=${dd.value.toString()}`,{withCredentials:true});
+                    console.log(res);
+                }catch(err){
+                    console.log(err.message);
+                }
+            }
+            sendData();
+            console.log(dd.value);
+        }) 
+    }, []);
+    console.log(location);
+    useEffect(() => {
+        if(location.time){
+            console.log("first");
+            playerRef.current.seekTo(location.time);
+        }
+    }, []);
+    
     return (
         <>
+                
+                <input type="text" name="time" id="tsss" readOnly value={currentTime || ''} hidden/>
+                <input type="text" name="total" id="dura" readOnly value={duration || ''} hidden/>
                 <div
                 onMouseMove={handleMouseMove}
                 onMouseLeave={hanldeMouseLeave}
@@ -250,7 +291,8 @@ export default function VideoPlayer() {
                     volume={volume}
                     muted={muted}
                     onProgress={handleProgress}
-                    className={classes.reactPlayer}
+                    className='reactPlayer'
+                    
                     
                 />
                 <Controls

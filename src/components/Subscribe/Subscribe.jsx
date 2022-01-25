@@ -25,11 +25,11 @@ export default function Subscribe() {
     const handleClick = () =>{
         setclick(!click);
     }
-    const history = useHistory();
-    const location = useLocation();
-    // if(!isUser){
-    //     history.push(`/login?returnUrl=${location.pathname}`)
-    // }
+    // const history = useHistory();
+    // const location = useLocation();
+    // // if(!isUser){
+    // //     history.push(`/login?returnUrl=${location.pathname}`)
+    // // }
     var subscription='';
     if(localStorage.getItem('user')===null){
         subscription= 'Free';
