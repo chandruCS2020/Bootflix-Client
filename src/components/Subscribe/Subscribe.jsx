@@ -38,7 +38,7 @@ export default function Subscribe() {
     }
     const Razorpay = useRazorpay();
     const handlePremium = ()=>{
-        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum')
+        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum',{withCredentials:true})
         .then((data1)=>{
             console.log(data1)
             handlePayment(data1.data.clientId,data1.data.id);
@@ -48,7 +48,7 @@ export default function Subscribe() {
         })
     }
     const handleStandard = ()=>{
-        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Standard')
+        axios.get('https://apibootflix.herokuapp.com/upgradePlan/Standard',{withCredentials:true})
         .then((data1)=>{
             console.log(data1)
             handlePayment(data1.data.clientId,data1.data.id);
