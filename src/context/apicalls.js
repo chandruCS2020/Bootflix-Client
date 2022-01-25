@@ -25,7 +25,7 @@ export const logout = async()=>{
     try{
         await axios.get("https://apibootflix.herokuapp.com/logout",{withCredentials:true});
         localStorage.removeItem('user');
-        window.location.href='http://localhost:3000/';
+        window.location.href='https://bootflix.herokuapp.com/';
     }catch(err){
         console.log(err.message);
     }
