@@ -11,6 +11,7 @@ export default function Genre() {
     console.log(location);
     let genre='';
     const [genreList, setgenreList] = useState([]);
+    const [loading, setloading] = useState(false);
     if(location.pathname==='/search'){
         type=location.pathname.split('/')[1];
         const params = new URLSearchParams(location.search)
@@ -28,6 +29,9 @@ export default function Genre() {
             try{
                 const res = await axios.get(`https://apibootflix.herokuapp.com/list-movies${type==='search' ? `?search=`+search : ''}${type==='genre' ? `?genre=`+genre : ''}${type==='movie' ? '' :''}`);
                 setgenreList(res.data.result);
+                if(res.status===200){
+                    setloading(true);
+                }
             }catch(err){
                 console.log(err.message);
             }
@@ -40,23 +44,31 @@ export default function Genre() {
             <Navbar />
             <div className="genre">
                 
-                {genreList.length<=0 ? 
+                {
+                    loading ?
                     <>
-                        <div className="noData">
-                            <h1 className="nodataFound">{type==='search' ? 'No Results Found' : 'No Movie Found'}</h1>
+                        {genreList.length<=0 ? 
+                        <>
+                            <div className="noData">
+                                <h1 className="nodataFound">{type==='search' ? 'No Results Found' : 'No Movie Found'}</h1>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <h2 className="genreTitle">{type==='search' ? 'Showing all results for '+search : type==='genre' ? genre : 'Movie'}</h2>
+    
+                            <div className='genreWrapper'>
+                                {genreList.map((item,i)=>(
+                                    <ListItem item={item} key={i}/>
+                                ))}
+                            </div>
+                        </>
+                
+                    }
+                    </> : <div className="loaderContainer">
+                        <div className="loader">
                         </div>
-                    </>
-                    :
-                    <>
-                        <h2 className="genreTitle">{type==='search' ? 'Showing all results for '+search : type==='genre' ? genre : 'Movie'}</h2>
-
-                        <div className='genreWrapper'>
-                            {genreList.map((item,i)=>(
-                                <ListItem item={item} key={i}/>
-                            ))}
-                        </div>
-                    </>
-            
+                    </div>
                 }
             </div>
         </>

@@ -46,11 +46,11 @@ export default function Myaccount() {
                             </div>:
                             JSON.parse(localStorage.getItem('user')).plan.plan==='Standard'?<div className="subscription_details">
                             <h3 className="sub_detials">Bootflix Standard for ₹ 399/year</h3>
-                            <h4 className="sub_price">{JSON.parse(localStorage.getItem('user')).plan.days} <span>Days </span>{JSON.parse(localStorage.getItem('user')).plan.hours} <span> Hours </span> to expire</h4>
+                            <h4 className="sub_price"><span>Expires on </span>{JSON.parse(localStorage.getItem('user')).plan.expiryDate}-{JSON.parse(localStorage.getItem('user')).plan.expiryMonth}-{JSON.parse(localStorage.getItem('user')).plan.expiryYear}</h4>
                         </div>:<div className="subscription_details">
-                                <h3 className="sub_detials">Get more with Bootflix Premium</h3>
-                                <h4 className="sub_price">Only ₹799/year</h4>
-                            </div>
+                            <h3 className="sub_detials">Bootflix Premium for ₹ 799/year</h3>
+                            <h4 className="sub_price"><span>Expires on </span>{JSON.parse(localStorage.getItem('user')).plan.expiryDate}-{JSON.parse(localStorage.getItem('user')).plan.expiryMonth}-{JSON.parse(localStorage.getItem('user')).plan.expiryYear}</h4>
+                        </div>
                             }
                             <div onClick={handleSubscribeLink} className="subscribe_btn">{JSON.parse(localStorage.getItem('user')).plan.plan==='Free'?`Subscribe`:`Upgrade Plan`}</div>
                         </div>

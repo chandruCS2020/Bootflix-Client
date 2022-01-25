@@ -5,13 +5,37 @@ import './continueList.css';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import axios from 'axios';
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
 export default function ContinueList({list,loading}) {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+        setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const listRef = useRef();
     const [slideNumber, setslideNumber] = useState(0);
     
     const [continueloading, setcontinueloading] = useState(false);
     const [continueList, setcontinueList] = useState([]);
-    const slide = continueList.length - 5;
+    let slide = continueList.length - 5;
+    if(windowDimensions.width < 1110 && windowDimensions.width > 700){
+        slide = continueList.length - 3;
+    }else if(windowDimensions.width<700 && windowDimensions.width>600){
+        slide = continueList.length - 2;
+    }else{
+        slide = continueList.length - 1;
+    }
     const handleClick = (direction) =>{
         let distance = listRef.current.getBoundingClientRect().x - 60;
         console.log(distance);

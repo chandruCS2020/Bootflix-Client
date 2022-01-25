@@ -91,9 +91,9 @@ function Navbar(props) {
                                 </li>
                                 <li>
                                     <div className="dropdown-container">
-                                        <NavLink className="nav-link" to='/categories'>
+                                        <div className="nav-link" to='/categories'>
                                             <div>Categories</div>
-                                        </NavLink>
+                                        </div>
                                         <div className="sublink-container slide-up">
                                             <NavLink to='/genre/Action' className='dropdown-link'>Action</NavLink>
                                             <NavLink to='/genre/Thriller' className='dropdown-link'>Thriller</NavLink>
@@ -102,17 +102,12 @@ function Navbar(props) {
                                             <NavLink to='/genre/Crime' className='dropdown-link'>Crime</NavLink>
                                             <NavLink to='/genre/Fantacy' className='dropdown-link'>Fantacy</NavLink>
                                             <NavLink to='/genre/Sports' className='dropdown-link'>Sports</NavLink>
-                                            <NavLink to='/genre/Comedyt' className='dropdown-link'>Comedy</NavLink>
+                                            <NavLink to='/genre/Comedy' className='dropdown-link'>Comedy</NavLink>
                                             <NavLink to='/genre/Horror' className='dropdown-link'>Horror</NavLink>
                                             <NavLink to='/genre/Mystery' className='dropdown-link'>Mystery</NavLink>
                                             <NavLink to='/genre/Romance' className='dropdown-link'>Romance</NavLink>
                                         </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <NavLink className="nav-link" to='/songs'>
-                                            <div>Songs</div>
-                                    </NavLink>
                                 </li>
                             </ul>
                         </div>
@@ -210,14 +205,6 @@ function Navbar(props) {
                                             <AccountCircleIcon />
                                         </div>
                                         <div>My Account</div>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/songs'>
-                                        <div className="iconClass Songs">
-                                            <LibraryMusicIcon />
-                                        </div>
-                                        <div>Songs</div>
                                     </NavLink>
                                 </li>
                             </ul>

@@ -7,8 +7,10 @@ import './FeatureList.css';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import axios from 'axios';
+
 export default function FeatureList() {
     const [Index, setIndex] = useState(0);
+    
     const NextArrow = ({ onClick }) => {
         return (
         <div className="arrow next"  style={{borderRadius:'50%',padding:'10px'}} onClick={onClick}>

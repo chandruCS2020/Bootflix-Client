@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './ListItem.css'
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,25 +8,35 @@ import { WishList } from '../../context/apicalls';
 import axios from 'axios';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import { RemoveWishList } from '../../context/apicalls';
+import OfflineBoltIcon from '@mui/icons-material/OfflineBolt';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import { AuthContext } from '../../context/AuthContext';
 export default function ListItem({item}) {
     const [data, setdata] = useState([]);
+    const {isUser} = useContext(AuthContext);
     useEffect(() => {
         var d=document.querySelectorAll('.my-anchor-css-class');
         for (let i = 0; i < d.length; i++) {
             d[i].remove();
         }
-        const data = async()=>{
-            try{
-                const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
-                setdata(res.data);
-            }catch(err){
-                console.log(err.message);
-            }
-        }
-        data();
+        // const data = async()=>{
+        //     try{
+        //         const res = await axios.get('https://apibootflix.herokuapp.com/getWhishList',{withCredentials:true});
+        //         setdata(res.data);
+        //     }catch(err){
+        //         console.log(err.message);
+        //     }
+        // }
+        // data();
     }, []);
-    const movieIds = Object.keys(data);
-    const added = movieIds.find(element => element===item._id);
+    let data1 =[];
+    var movieIds = '';
+    var added = '';
+    if(isUser){
+        data1 = JSON.parse(localStorage.getItem('user')).whislist;
+        movieIds = Object.keys(JSON.parse(data1));
+        added = movieIds.find(element => element===item._id);
+    }
     const [addedIcon, setaddedIcon] = useState(false);
     return (
         <>
@@ -35,6 +45,7 @@ export default function ListItem({item}) {
                         <img src={'https://apibootflix.herokuapp.com/get-images/'+item.image} alt="Poster" />
                         </Link>
                         <div className="listItemBackground"></div>
+                        <div className="iconGet">{item.plan==='Standard' ? <OfflineBoltIcon /> : item.plan!=='Free' && <LocalFireDepartmentIcon style={{color:'red'}} />}</div>
                         <div className="listItemInfo">
                             <div className="listItemsIcon">
                                 <Link to={`/movie/${item._id}`}>

@@ -210,8 +210,7 @@ const Controls = forwardRef(
               </Grid>
           </Grid>
           <Grid container direction="row" alignItems="center" justifyContent="center">
-              {elapsedTime===totalDuration ?<> <ReplayIcon onClick={onPlayPause} fontSize="large" style={{color:'#fff',cursor:'pointer'}} /></> 
-                  :
+              {
                   <><Button
                               onClick={onRewind}
                               className={classes.controlIcons}
@@ -272,7 +271,7 @@ const Controls = forwardRef(
                     onClick={onPlayPause}
                     className={classes.bottomIcons}
                   >
-                    { elapsedTime===totalDuration ? <ReplayIcon onClick={onPlayPause} fontSize="inherit"  style={{cursor:'pointer'}} /> : playing ? (
+                    {playing ? (
                       <PauseIcon fontSize="inherit" />
                     ) : (
                       <PlayArrowRoundedIcon fontSize="inherit" />

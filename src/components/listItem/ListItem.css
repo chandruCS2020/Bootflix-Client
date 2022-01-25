@@ -56,7 +56,18 @@
 .tick{
     color: skyblue!important;
 }
-@media screen and (max-width:465px) {
+.iconGet{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: var(--btn-color);
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media screen and (max-width:765px) {
     .listItem .listItemInfo,.listItem .listItemBackground{
         display: block;
     }

@@ -5,6 +5,9 @@ import Controls from '../PlayerControl/Controls';
 import screenful from 'screenfull';
 import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Subscribe from "../Subscribe/Subscribe";
 
 const useStyles = makeStyles((theme) => ({
     playerWrapper: {
@@ -90,6 +93,7 @@ const format = (seconds) => {
 let count = 0;
 export default function VideoPlayer() {
     const classes = useStyles();
+    const {isUser} = useContext(AuthContext);
     const [showControls, setShowControls] = useState(false);
     // const [count, setCount] = useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -259,6 +263,30 @@ export default function VideoPlayer() {
         }) 
     }, []);
     console.log(location);
+    const [plan, setplan] = useState('');
+    const [erroeredirect, seterroeredirect] = useState(false);
+    useEffect(() => {
+        const getdata = async()=>{
+            try{
+                const res = await axios.get('https://apibootflix.herokuapp.com/movie/'+id+'/watch',{withCredentials:true});
+                if(res.status===200){
+                    console.log("se");
+                    seterroeredirect(true);
+                }
+                // setplan(res.data.plan);
+                // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
+            }catch(err){
+                seterroeredirect(true);
+                console.log(err.message);
+            }
+        }
+        getdata();
+    }, [id]);
+    console.log(isUser);
+    if(!isUser){
+        history.push('/login');
+    }
+
     useEffect(() => {
         if(location.time){
             console.log("first");
@@ -268,6 +296,11 @@ export default function VideoPlayer() {
     
     return (
         <>
+            {
+                erroeredirect ?
+                <Subscribe />
+                :
+                <>
                 
                 <input type="text" name="time" id="tsss" readOnly value={currentTime || ''} hidden/>
                 <input type="text" name="total" id="dura" readOnly value={duration || ''} hidden/>
@@ -320,6 +353,8 @@ export default function VideoPlayer() {
                     movieId={id}
                 />
                 </div>
+        </>
+            }
         </>
     )
 }
