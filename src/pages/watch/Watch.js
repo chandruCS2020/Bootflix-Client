@@ -1,4 +1,4 @@
-import React, { useEffect , useState } from 'react'
+import React, { useEffect , useState ,useContext} from 'react'
 import './watch.css';
 import VideoPlayer from '../../components/Player/VideoPlayer'
 import Navbar from '../../components/Navbar/Navbar';
@@ -11,8 +11,10 @@ import axios from 'axios';
 import WatchItem from '../../components/watchItem/WatchItem';
 import { RemoveWishList, WishList } from '../../context/apicalls';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
+import  {AuthContext } from '../../context/AuthContext';
 export default function Watch() {
     const location = useLocation();
+    const {isUser} = useContext(AuthContext);
     const movieId=location.pathname.split('/')[2];
     const [movieItem, setmovieItem] = useState([]);
     const [loading, setloading] = useState(false);
@@ -51,7 +53,7 @@ export default function Watch() {
     if(isUser){
         data1 = JSON.parse(localStorage.getItem('user')).whislist;
         movieIds = Object.keys(JSON.parse(data1));
-        added = movieIds.find(element => element===item._id);
+        added = movieIds.find(element => element===movieItem._id);
     }
     const [addedIcon, setaddedIcon] = useState(false);
     
