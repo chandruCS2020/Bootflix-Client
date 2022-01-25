@@ -283,9 +283,10 @@ export default function VideoPlayer() {
         getdata();
     }, [id]);
     console.log(isUser);
-    if(!isUser){
+    if(isUser===false){
         history.push('/login');
     }
+    console.log(isUser);
 
     useEffect(() => {
         if(location.time){
