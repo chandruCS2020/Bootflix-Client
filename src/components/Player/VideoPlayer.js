@@ -282,12 +282,10 @@ export default function VideoPlayer() {
         }
         getdata();
     }, [id]);
-    console.log(isUser);
-    if(isUser===false){
-        history.push('/login');
+    
+    if(localStorage.getItem('user')===null){
+        history.push(`/login`)
     }
-    console.log(isUser);
-
     useEffect(() => {
         if(location.time){
             console.log("first");
