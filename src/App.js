@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Subscribe from './components/Subscribe/Subscribe';
 import Watchlist from './pages/watchlist/watchlist'
@@ -14,10 +14,10 @@ import Genre from './pages/genre/Genre';
 import LogoutAll from './pages/logout/LogoutAll';
 
 function App() {
-  const { isUser,dispatch } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
   useEffect(() => {
       login(dispatch);
-  }, [])
+  }, [dispatch])
   return (
     <div className="App">
       <Router>

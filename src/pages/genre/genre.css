@@ -49,6 +49,9 @@
       justify-content: center;
       align-items: center;
   }
+  @media screen and (max-width:765px) {
+        .loaderContainer{width: 100vh;}
+  }
 @media screen and (max-width:465px) {
     .genreWrapper{
         justify-content: center;
