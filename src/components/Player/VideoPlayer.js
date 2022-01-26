@@ -272,15 +272,17 @@ export default function VideoPlayer() {
                 if(res.status===200){
                     console.log("se");
                     seterroeredirect(true);
+                }else if(res.status===404){
+                    seterroeredirect(true);
                 }
                 // setplan(res.data.plan);
                 // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
             }catch(err){
-                seterroeredirect(true);
+                
                 console.log(err.message);
             }
         }
-        getdata();
+        // getdata();
     }, [id]);
     
     if(localStorage.getItem('user')===null){

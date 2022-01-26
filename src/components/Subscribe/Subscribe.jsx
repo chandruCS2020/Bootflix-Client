@@ -19,6 +19,7 @@ export default function Subscribe() {
     const [click, setclick] = useState(false);
     const {isUser} = useContext(AuthContext);
     console.log(isUser);
+    const [loading, setloading] = useState(false);
     const [open, setOpen] = useState(false);
     const onOpenModal = () => {setOpen(true)};
     const onCloseModal = () => setOpen(false);
@@ -38,20 +39,28 @@ export default function Subscribe() {
     }
     const Razorpay = useRazorpay();
     const handlePremium = ()=>{
+        setloading(true);
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Preminum',{withCredentials:true})
         .then((data1)=>{
             console.log(data1)
             handlePayment(data1.data.clientId,data1.data.id);
+            if(data1.status===200){
+                setloading(false);
+            }
         })
         .catch((err)=>{
             console.log(err.message);
         })
     }
     const handleStandard = ()=>{
+        setloading(true);
         axios.get('https://apibootflix.herokuapp.com/upgradePlan/Standard',{withCredentials:true})
         .then((data1)=>{
             console.log(data1)
             handlePayment(data1.data.clientId,data1.data.id);
+            if(data1.status===200){
+                setloading(false);
+            }
         })
         .catch((err)=>{
             console.log(err.message);
@@ -176,6 +185,9 @@ export default function Subscribe() {
                     </div>
                 </div>
             </div>
+            {loading && <div className="loadingContainer">
+                <div className="loader"></div>
+            </div>}
         </div>
     )
 }

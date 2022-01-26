@@ -2,6 +2,7 @@
     min-height: 100vh;
     width: 100%;
     background-color: var(--bg-color);
+    position: relative;
 }
 .Subscribe_Navbar{
     display: flex;
@@ -144,6 +145,16 @@
 .Subscribe_container_main.current{
     pointer-events: none;
     opacity: 0.5;
+}
+.loadingContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.356);
 }
 @media screen and (max-width:660px) {
     .Subscribe_container{
