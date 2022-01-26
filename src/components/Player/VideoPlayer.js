@@ -236,12 +236,6 @@ export default function VideoPlayer() {
 
     const totalDuration = format(duration);
     const history = useHistory();
-    const [Time, setTime] = useState('');
-    let search='';
-    
-    useEffect(() => {
-        setTime(elapsedTime);
-    }, [elapsedTime]);
     useEffect(() => {
         const data= document.getElementById('tsss');
         const dd=document.getElementById('dura');
@@ -282,8 +276,7 @@ export default function VideoPlayer() {
         <>
             {
                 isEligible ?
-                <Subscribe />
-                :
+                
                 <>
                 
                 <input type="text" name="time" id="tsss" readOnly value={currentTime || ''} hidden/>
@@ -338,6 +331,8 @@ export default function VideoPlayer() {
                 />
                 </div>
         </>
+        : <Subscribe />
+        
             }
         </>
     )
