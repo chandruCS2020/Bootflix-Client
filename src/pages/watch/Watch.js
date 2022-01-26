@@ -12,9 +12,12 @@ import WatchItem from '../../components/watchItem/WatchItem';
 import { RemoveWishList, WishList } from '../../context/apicalls';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import  {AuthContext } from '../../context/AuthContext';
+import { Eligible } from '../../context/movieContext/apicalls';
+import { MovieContext } from '../../context/movieContext/MovieContext';
 export default function Watch() {
     const location = useLocation();
     const {isUser} = useContext(AuthContext);
+    const {isEligible,dispatch} = useContext(MovieContext);
     const movieId=location.pathname.split('/')[2];
     const [movieItem, setmovieItem] = useState([]);
     const [loading, setloading] = useState(false);
@@ -56,6 +59,7 @@ export default function Watch() {
         added = movieIds.find(element => element===movieItem._id);
     }
     const [addedIcon, setaddedIcon] = useState(false);
+    
     
     return (
         <>

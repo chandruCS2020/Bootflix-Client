@@ -8,6 +8,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Subscribe from "../Subscribe/Subscribe";
+import { MovieContext } from "../../context/movieContext/MovieContext";
 
 const useStyles = makeStyles((theme) => ({
     playerWrapper: {
@@ -94,6 +95,7 @@ let count = 0;
 export default function VideoPlayer() {
     const classes = useStyles();
     const {isUser} = useContext(AuthContext);
+    const {isEligible} = useContext(MovieContext);
     const [showControls, setShowControls] = useState(false);
     // const [count, setCount] = useState(0);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -235,6 +237,13 @@ export default function VideoPlayer() {
     const totalDuration = format(duration);
     const history = useHistory();
     const [Time, setTime] = useState('');
+    let search='';
+    useEffect(() => {
+        const params = new URLSearchParams(location.search)
+        search=params.get('isEligible');
+        console.log(search);
+    }, []);
+    
     useEffect(() => {
         setTime(elapsedTime);
     }, [elapsedTime]);
@@ -264,27 +273,27 @@ export default function VideoPlayer() {
     }, []);
     console.log(location);
     const [plan, setplan] = useState('');
-    const [erroeredirect, seterroeredirect] = useState(false);
-    useEffect(() => {
-        const getdata = async()=>{
-            try{
-                const res = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+id,{withCredentials:true});
-                if(res.status===200){
-                    console.log("se");
-                    seterroeredirect(false);
-                }else if(res.status===404){
-                    console.log("404");
-                    seterroeredirect(true);
-                }
-                // setplan(res.data.plan);
-                // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
-            }catch(err){
-                seterroeredirect(true);
-                console.log(err.message);
-            }
-        }
-        getdata();
-    }, [id]);
+    // const [erroeredirect, seterroeredirect] = useState(false);
+    // useEffect(() => {
+    //     const getdata = async()=>{
+    //         try{
+    //             const res = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+id,{withCredentials:true});
+    //             if(res.status===200){
+    //                 console.log("se");
+    //                 seterroeredirect(false);
+    //             }else if(res.status===404){
+    //                 console.log("404");
+    //                 seterroeredirect(true);
+    //             }
+    //             // setplan(res.data.plan);
+    //             // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
+    //         }catch(err){
+    //             seterroeredirect(true);
+    //             console.log(err.message);
+    //         }
+    //     }
+    //     getdata();
+    // }, [id]);
     
     if(localStorage.getItem('user')===null){
         history.push(`/login`)
@@ -296,10 +305,11 @@ export default function VideoPlayer() {
         }
     }, []);
     
+    
     return (
         <>
             {
-                erroeredirect ?
+                isEligible ?
                 <Subscribe />
                 :
                 <>

@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './watchItem.css';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Eligible } from '../../context/movieContext/apicalls';
+import { MovieContext } from '../../context/movieContext/MovieContext';
 
 export default function WatchItem({item}) {
+    const [erroeredirect, seterroeredirect] = useState(false);
     
+    const {isEligible,dispatch} = useContext(MovieContext);
+    // useEffect(() => {
+    //     const getdata = async()=>{
+    //         try{
+    //             const res = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+item._id,{withCredentials:true});
+    //             if(res.status===200){
+    //                 console.log("se");
+    //                 seterroeredirect(false);
+    //             }else if(res.status===404){
+    //                 console.log("404");
+    //                 seterroeredirect(true);
+    //             }
+    //             // setplan(res.data.plan);
+    //             // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
+    //         }catch(err){
+    //             seterroeredirect(true);
+    //             console.log(err.message);
+    //         }
+    //     }
+    //     // getdata();
+    // }, []);
+    useEffect(() => {
+        Eligible(dispatch,item._id);
+    }, []);
+    console.log(isEligible);
     return(
         <>
-            <Link to={'/movie/'+item._id+'/watch'}>
+            <Link to={`/movie/`+item._id+`/watch${erroeredirect ? `?isEligible=${erroeredirect}` : ''}`}>
                 <div className="FeatureItem">
                     <div className="FeatureItemsWrapper">
                         
