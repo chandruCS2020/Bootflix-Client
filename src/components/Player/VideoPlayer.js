@@ -268,10 +268,10 @@ export default function VideoPlayer() {
     useEffect(() => {
         const getdata = async()=>{
             try{
-                const res = await axios.get('https://apibootflix.herokuapp.com/movie/'+id+'/watch',{withCredentials:true});
+                const res = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+id,{withCredentials:true});
                 if(res.status===200){
                     console.log("se");
-                    seterroeredirect(true);
+                    seterroeredirect(false);
                 }else if(res.status===404){
                     seterroeredirect(true);
                 }
@@ -282,7 +282,7 @@ export default function VideoPlayer() {
                 console.log(err.message);
             }
         }
-        // getdata();
+        getdata();
     }, [id]);
     
     if(localStorage.getItem('user')===null){

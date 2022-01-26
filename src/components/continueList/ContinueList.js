@@ -33,7 +33,7 @@ export default function ContinueList({list,loading}) {
         slide = continueList.length - 3;
     }else if(windowDimensions.width<700 && windowDimensions.width>600){
         slide = continueList.length - 2;
-    }else{
+    }else if(windowDimensions.width<600){
         slide = continueList.length - 1;
     }
     const handleClick = (direction) =>{
