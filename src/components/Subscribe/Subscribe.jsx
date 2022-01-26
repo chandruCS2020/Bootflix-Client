@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import './subscribe.css'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/logo.png'
 import CheckIcon from '@mui/icons-material/Check';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';

@@ -1,11 +1,8 @@
 // import { ImagesearchRoller } from '@mui/icons-material';
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import './myaccount.css';
-import logo from '../../images/logo.png'
 import { useHistory, useLocation } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import { logout } from '../../context/apicalls';
 
 export default function Myaccount() {

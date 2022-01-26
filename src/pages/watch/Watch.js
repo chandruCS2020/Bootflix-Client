@@ -1,8 +1,6 @@
 import React, { useEffect , useState ,useContext} from 'react'
 import './watch.css';
-import VideoPlayer from '../../components/Player/VideoPlayer'
 import Navbar from '../../components/Navbar/Navbar';
-import {movie} from '../../data/moviedata';
 import  { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import Trailer from '../../components/trailer/Trailer';
@@ -12,12 +10,9 @@ import WatchItem from '../../components/watchItem/WatchItem';
 import { RemoveWishList, WishList } from '../../context/apicalls';
 import DownloadDoneIcon from '@mui/icons-material/DownloadDone';
 import  {AuthContext } from '../../context/AuthContext';
-import { Eligible } from '../../context/movieContext/apicalls';
-import { MovieContext } from '../../context/movieContext/MovieContext';
 export default function Watch() {
     const location = useLocation();
     const {isUser} = useContext(AuthContext);
-    const {isEligible,dispatch} = useContext(MovieContext);
     const movieId=location.pathname.split('/')[2];
     const [movieItem, setmovieItem] = useState([]);
     const [loading, setloading] = useState(false);
@@ -35,10 +30,8 @@ export default function Watch() {
             }
         }
         data();
-    }, []);
-    console.log(movieItem);
+    }, [movieId]);
     
-    const [data, setdata] = useState([]);
     // useEffect(() => {
     //     const data = async()=>{
     //         try{

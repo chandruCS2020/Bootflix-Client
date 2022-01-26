@@ -6,7 +6,6 @@ import screenful from 'screenfull';
 import { useHistory, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import Subscribe from "../Subscribe/Subscribe";
 import { MovieContext } from "../../context/movieContext/MovieContext";
 
@@ -94,13 +93,9 @@ const format = (seconds) => {
 let count = 0;
 export default function VideoPlayer() {
     const classes = useStyles();
-    const {isUser} = useContext(AuthContext);
     const {isEligible} = useContext(MovieContext);
-    const [showControls, setShowControls] = useState(false);
     // const [count, setCount] = useState(0);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
-    const [bookmarks, setBookmarks] = useState([]);
+    const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal")
     
     const location = useLocation();
     const id = location.pathname.split('/')[2];
@@ -123,10 +118,8 @@ export default function VideoPlayer() {
     const playerRef = useRef(null);
     const playerContainerRef = useRef(null);
     const controlsRef = useRef(null);
-    const canvasRef = useRef(null);
     const {
     playing,
-    controls,
     light,
 
     muted,
@@ -134,7 +127,6 @@ export default function VideoPlayer() {
     playbackRate,
     pip,
     played,
-    seeking,
     volume,
     } = state;
 
@@ -259,7 +251,7 @@ export default function VideoPlayer() {
             sendData();
             console.log(dd.value);
         }) 
-    }, []);
+    }, [history,id]);
     console.log(location);
     if(localStorage.getItem('user')===null){
         history.push(`/login`)
@@ -269,7 +261,7 @@ export default function VideoPlayer() {
             console.log("first");
             playerRef.current.seekTo(location.time);
         }
-    }, []);
+    }, [location.time]);
     
     console.log(isEligible);
     return (

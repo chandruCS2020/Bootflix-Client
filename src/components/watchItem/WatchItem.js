@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './watchItem.css';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { Eligible } from '../../context/movieContext/apicalls';
 import { MovieContext } from '../../context/movieContext/MovieContext';
 
 export default function WatchItem({item}) {
-    const [erroeredirect, seterroeredirect] = useState(false);
-    
     const {isEligible,dispatch} = useContext(MovieContext);
     // useEffect(() => {
     //     const getdata = async()=>{
@@ -32,11 +29,11 @@ export default function WatchItem({item}) {
     // }, []);
     useEffect(() => {
         Eligible(dispatch,item._id);
-    }, []);
+    }, [dispatch,item]);
     console.log(isEligible);
     return(
         <>
-            <Link to={`/movie/`+item._id+`/watch${erroeredirect ? `?isEligible=${erroeredirect}` : ''}`}>
+            <Link to={`/movie/`+item._id+`/watch`}>
                 <div className="FeatureItem">
                     <div className="FeatureItemsWrapper">
                         
