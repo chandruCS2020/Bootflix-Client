@@ -33,6 +33,7 @@ export default function Home() {
         getData();
         
     }, []);
+    console.log(isUser);
     return (
         <>
             <div className="home">

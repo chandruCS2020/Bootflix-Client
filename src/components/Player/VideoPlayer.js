@@ -238,11 +238,6 @@ export default function VideoPlayer() {
     const history = useHistory();
     const [Time, setTime] = useState('');
     let search='';
-    useEffect(() => {
-        const params = new URLSearchParams(location.search)
-        search=params.get('isEligible');
-        console.log(search);
-    }, []);
     
     useEffect(() => {
         setTime(elapsedTime);
@@ -254,11 +249,11 @@ export default function VideoPlayer() {
         const video = document.getElementsByClassName('reactPlayer');
         console.log(video);
         history.listen((location)=>{
-            const datas={};
-            datas['movieId']=id;
-            datas['curTime']=data.value;
-            datas['totalTime']=dd.value;
-            console.log(datas);
+            // const datas={};
+            // datas['movieId']=id;
+            // datas['curTime']=data.value;
+            // datas['totalTime']=dd.value;
+            // console.log(datas);
             const sendData = async()=>{
                 try{
                     const res = await axios.get(`https://apibootflix.herokuapp.com/addToHistory?movieId=${id}&&curTime=${data.value.toString()}&&totalTime=${dd.value.toString()}`,{withCredentials:true});
@@ -272,29 +267,6 @@ export default function VideoPlayer() {
         }) 
     }, []);
     console.log(location);
-    const [plan, setplan] = useState('');
-    // const [erroeredirect, seterroeredirect] = useState(false);
-    // useEffect(() => {
-    //     const getdata = async()=>{
-    //         try{
-    //             const res = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+id,{withCredentials:true});
-    //             if(res.status===200){
-    //                 console.log("se");
-    //                 seterroeredirect(false);
-    //             }else if(res.status===404){
-    //                 console.log("404");
-    //                 seterroeredirect(true);
-    //             }
-    //             // setplan(res.data.plan);
-    //             // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
-    //         }catch(err){
-    //             seterroeredirect(true);
-    //             console.log(err.message);
-    //         }
-    //     }
-    //     getdata();
-    // }, [id]);
-    
     if(localStorage.getItem('user')===null){
         history.push(`/login`)
     }

@@ -26,7 +26,7 @@ export default function Subscribe() {
     const handleClick = () =>{
         setclick(!click);
     }
-    // const history = useHistory();
+    const history = useHistory();
     // const location = useLocation();
     // // if(!isUser){
     // //     history.push(`/login?returnUrl=${location.pathname}`)
@@ -104,6 +104,9 @@ export default function Subscribe() {
     const orderRequest = (data)=>{
         axios.post("https://apibootflix.herokuapp.com/payment-succesfull",data,{withCredentials:true}).then((data1)=>{
             console.log(data1);
+            if(data1.status===200){
+                history.push('/');
+            }
         }).catch((err)=>{console.log(err.message)})
     }
     return (

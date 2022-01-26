@@ -35,7 +35,7 @@ export default function Myaccount() {
                                 </div>
                                 <div className="user__ProfileInfo">
                                     <div className="user_details"><span className="userName"><span>{JSON.parse(localStorage.getItem('user')).firstName} </span><span> {JSON.parse(localStorage.getItem('user')).lastName} </span></span></div>
-                                    <div className="user_details"><span className='userName_sub'>{JSON.parse(localStorage.getItem('user'))._id} </span></div>
+                                    <div className="user_details"><span className='userName_sub'>{JSON.parse(localStorage.getItem('user')).handle} </span></div>
                                 </div>
                             </div>
                         </div>
