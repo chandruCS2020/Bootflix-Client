@@ -277,7 +277,7 @@ export default function VideoPlayer() {
         }
     }, []);
     
-    
+    console.log(isEligible);
     return (
         <>
             {
