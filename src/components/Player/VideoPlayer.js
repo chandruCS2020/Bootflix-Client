@@ -273,12 +273,13 @@ export default function VideoPlayer() {
                     console.log("se");
                     seterroeredirect(false);
                 }else if(res.status===404){
+                    console.log("404");
                     seterroeredirect(true);
                 }
                 // setplan(res.data.plan);
                 // seterroeredirect(res.data.plan===`${isUser ? JSON.parse(localStorage.getItem('user')).plan.plan : 'Free'}`)
             }catch(err){
-                
+                seterroeredirect(true);
                 console.log(err.message);
             }
         }
