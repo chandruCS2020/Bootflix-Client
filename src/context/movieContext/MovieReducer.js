@@ -2,7 +2,7 @@ const MovieReducer = (state, action) => {
     switch (action.type) {
     case "ELIGIBLE_MOVIES_START":
         return {
-        isEligible: false,
+        isEligible: true,
         isFetching: true,
         error: false,
         };
@@ -14,7 +14,7 @@ const MovieReducer = (state, action) => {
         };
     case "ELIGIBLE_MOVIES_FAILURE":
         return {
-        isEligible: false,
+        isEligible: true,
         isFetching: false,
         error: true,
         };

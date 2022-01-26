@@ -7,7 +7,7 @@ export const Eligible = async (dispatch,id) => {
         const response = await axios.get('https://apibootflix.herokuapp.com/isEligiblieForMovie/'+id,{withCredentials:true});
         if(response.status===200){
             console.log("eligible");
-            dispatch(eligibleMoviesSuccess(true));
+            dispatch(eligibleMoviesSuccess(false));
         }
         
     } catch (err) {

@@ -2,7 +2,7 @@ import MovieReducer from "./MovieReducer";
 import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
-isEligible: false,
+isEligible: true,
 isFetching: false,
 error: false,
 };
