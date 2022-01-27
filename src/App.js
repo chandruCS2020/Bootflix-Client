@@ -19,9 +19,9 @@ function App() {
       login(dispatch);
   }, [dispatch])
   // const location = useLocation();
-//   if (window.location.protocol !== 'https:') {
-//     window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
-// }
+  if (window.location.protocol !== 'https:') {
+    window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+}
   return (
     <div className="App">
       <Router>
