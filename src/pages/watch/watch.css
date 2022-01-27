@@ -56,3 +56,8 @@
     letter-spacing: 0.4px;
     font-size: 20px;
 }
+@media screen and (max-width:565px) {
+    .movieWatch{
+        padding: 30px 10px;
+    }
+}

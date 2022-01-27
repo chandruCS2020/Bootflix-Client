@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Subscribe from './components/Subscribe/Subscribe';
 import Watchlist from './pages/watchlist/watchlist'
@@ -18,6 +18,10 @@ function App() {
   useEffect(() => {
       login(dispatch);
   }, [dispatch])
+  // const location = useLocation();
+//   if (window.location.protocol !== 'https:') {
+//     window.location.replace(`https:${window.location.href.substring(window.location.protocol.length)}`);
+// }
   return (
     <div className="App">
       <Router>
